@@ -1,0 +1,712 @@
+/* ============================================================================================================================
+ * GLOBAL STYLING
+ * ============================================================================================================================
+ */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+/* Import Google Font for Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* Apply Open Sans and Arial globally */
+body, h1, h2, h3, p {
+    font-family: 'Open Sans', 'Arial Narrow', Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.9);
+    height: 100vh;
+    color: #fff;
+}
+
+/* ============================================================================================================================
+ * HEADER STYLING
+ * ============================================================================================================================
+ */
+header {
+    background-color: #2d2d2d;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    /* Ensure the header elements have padding from the sides */
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+/* Main Header Container */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Logo Section */
+.logo-section {
+    display: flex;
+    align-items: center;
+    /* Ensures the logo is spaced away from the edge */
+    margin-left: 5%;
+}
+
+#logo {
+    height: 45px;
+    width: auto;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #c778ff;
+    margin-left: 10px;
+}
+
+/* Navigation Links Section - Center the menu */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    /* Ensure the menu is centered horizontally */
+    flex: 1;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #c778ff;
+}
+
+/* Support Button Section */
+.support-section {
+    display: flex;
+    align-items: center;
+    /* Ensures the support button is spaced away from the edge */
+    margin-right: 5%;
+}
+
+.support-button {
+    background-color: transparent;
+    border: 2px solid #c778ff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: #c778ff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.support-button:hover {
+    background-color: #c778ff;
+    color: #fff;
+}
+
+/* Mobile Menu Icon (Visible on smaller screens) */
+#menuhamburger {
+    display: none;
+}
+
+/* ============================================================================================================================
+ * MENU RESPONSIVE
+ * ============================================================================================================================
+ */
+
+/* Activate the mobile menu when screen width is below 1000px (when images stack vertically) */
+@media (max-width:1000px) {
+    /* Hide the main desktop menu */
+    header .menu {
+        display: none;
+    }
+
+    /* Remove the support button when the mobile menu is shown */
+    .support-section {
+        display: none;
+    }
+
+    /* Show the menu toggle (hamburger) */
+    .menu_toggle {
+        z-index: 10;
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu_toggle::before {
+        position: absolute;
+        content: "";
+        transform: translateY(-10px);
+        width: 28px;
+        height: 5px;
+        background-color: #fff;
+        border-radius: 6px;
+        box-shadow: 6px 10px #fff;
+        transition: 0.5s;
+    }
+
+    .menu_toggle.active::before {
+        box-shadow: 0 0 #fff;
+        transform: rotate(135deg);
+    }
+
+    .menu_toggle::after {
+        position: absolute;
+        content: "";
+        transform: translateY(10px);
+        width: 28px;
+        height: 5px;
+        background-color: #fff;
+        border-radius: 6px;
+        transition: 0.5s;
+    }
+
+    .menu_toggle.active::after {
+        transform: rotate(-135deg);
+    }
+
+    /* Mobile menu styles */
+    header .menu.responsive {
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header .menu.responsive li {
+        margin: 10px 0;
+    }
+}
+
+/* ============================================================================================================================
+ * MAIN CONTENT STYLING (Teams Section Replaces the Description Section)
+ * ============================================================================================================================
+ */
+ .teamsSection {
+    width: 100%;
+    height: auto;
+    z-index: 2;
+    margin-bottom: 5rem;
+    margin-top: 2rem;
+    position: relative;
+}
+
+.teamsSectionContainer {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.teamsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 9%; /* Adjust padding as necessary */
+}
+
+.teamContainer {
+    width: 33%;
+    height: 300px; /* Consistent height for all containers */
+    position: relative;
+    margin-right: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.teamContainer:last-child {
+    margin-right: 0;
+}
+
+/* Uniform sizing and coverage for background images */
+.teamBackgroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures image covers container while maintaining aspect ratio */
+    object-position: center;
+    filter: grayscale(1) brightness(0.4); /* Applies grayscale and brightness filter */
+    transition: all 0.5s ease; /* Smooth transition on hover */
+}
+
+.teamContainer:hover .teamBackgroundImage {
+    transform: scale(1.1);  /* Scales the image slightly on hover */
+    filter: none;  /* Removes filter on hover */
+}
+
+/* Consistent logo positioning and size */
+.gameLogo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%; /* Adjust size if needed */
+    height: auto;
+    filter: drop-shadow(0 0 9px black);
+}
+
+/* Mobile layout adjustments */
+@media (max-width: 1000px) {
+    .teamsContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centre les conteneurs horizontalement */
+        margin-top: 1.5rem;
+    }
+
+    .teamContainer {
+        width: 100%;
+        max-width: 90%; /* Limite la largeur des conteneurs */
+        margin-left: auto;
+        margin-right: auto;
+        height: 200px; /* Ajuste la hauteur pour les petits écrans */
+        margin-bottom: 1.5rem;
+    }
+
+    .teamContainer:first-child {
+        margin-top: 4rem; /* Ajoute un espace au-dessus de la première image */
+    }
+
+    .teamContainer:last-child {
+        margin-bottom: 0;
+        margin-right: auto;
+    }
+}
+
+
+/* ============================================================================================================================
+ * MAIN CONTENT SECTION - DISCORD
+ * ============================================================================================================================
+ */
+ .discord-section {
+    width: 100%;
+    z-index: 2;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    padding: 50px 8%;
+    text-align: center;
+    color: white;
+}
+
+.discord-header h1 {
+    margin-top: 2rem;
+    font-size: 48px;
+    color: #c778ff;
+    margin-bottom: 10px;
+}
+
+/* ============================================================================================================================
+ * MAIN CONTENT SECTION - CLASH OF CLAN
+ * ============================================================================================================================
+ */
+/* Style for the ClashOfClan section and text */
+.clashofclan-section {
+    width: 100%;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    padding: 50px 8%;
+    text-align: center;
+    color: white;
+}
+
+.clashofclan-header h1 {
+    margin-top: 2rem;
+    font-size: 36px;
+    color: #c778ff;
+    margin-bottom: 1px; /* Set 1px space between title and text */
+    padding-bottom: 15px;
+}
+
+.clashofclan-header p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.clashofclan-header .highlight a {
+    color: #ff00b0;
+}
+
+.clashofclan-header .bouton a {
+    color: #439eff;
+}
+
+.clashofclan-header .alerte-premium {
+    color: #ff0000;
+}
+
+.clashofclan-header .premium a {
+    color: #c778ff;
+    text-decoration: none; /* Supprime le soulignement */
+}
+
+/* Container for the command section */
+.SectionClashOfClan {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.SectionClashOfClanContainer {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Command Image Container */
+.command-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.command-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #2d2d2d;
+}
+
+/* Footer text below the image */
+.command-footer {
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 50px;
+}
+
+.command-footer p {
+    font-size: 14px;
+    color: #cccccc;
+}
+
+/* Styling for responsiveness */
+@media screen and (max-width: 800px) {
+    .clashofclan-header h1 {
+        font-size: 28px;
+    }
+    
+    .clashofclan-header p {
+        font-size: 14px;
+    }
+
+    .command-footer p {
+        font-size: 12px;
+    }
+}
+
+/* ============================================================================================================================
+ * MAIN CONTENT SECTION - PREMIUM
+ * ============================================================================================================================
+ */
+ /* Style pour les liens à l'intérieur de la classe .highlight */
+.highlight a {
+    color: inherit; /* Hérite de la couleur du texte parent */
+    text-decoration: none; /* Supprime le soulignement */
+}
+
+.highlight a:hover {
+    text-decoration: none; /* Empêche le soulignement au survol */
+    color: inherit; /* Maintient la couleur lors du survol */
+}
+
+.premium-section {
+    width: 100%;
+    z-index: 2;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    padding: 50px 8%;
+    text-align: center;
+    color: white;
+}
+
+.premium-header h1 {
+    margin-top: 2rem;
+    font-size: 48px;
+    color: #c778ff;
+    margin-bottom: 10px;
+}
+
+.premium-header p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.premium-header .highlight {
+    color: #c778ff;
+}
+
+/* Premium Advantages Section */
+.premium-advantages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row by default */
+    gap: 40px; /* Increased gap to create more space on sides */
+    margin-top: 2rem;
+}
+
+/* Set a reduced fixed height for all boxes */
+.advantage-box {
+    background-color: #404040;
+    padding: 20px 15px; /* Increased padding for all sides */
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures content is evenly distributed */
+}
+
+.advantage-box:hover {
+    transform: translateY(-10px); /* Moves the box upwards */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adds a shadow for 3D effect */
+}
+
+.advantage-box h3 {
+    font-size: 16px;
+    margin-bottom: 8px; /* Reduced margin between heading and text */
+}
+
+.advantage-box p {
+    font-size: 12px;
+    margin-bottom: 8px; /* Reduced margin between paragraph and image */
+    line-height: 1.5; /* Ensures better readability */
+    flex-grow: 1; /* Ensures the text grows evenly */
+}
+
+/* Conteneur de l'image */
+.image-container {
+    width: 90%; /* Reduce the width to give more spacing on the sides */
+    aspect-ratio: 16 / 9; /* Ensures a 16:9 aspect ratio for all images */
+    margin: 0 auto 0; /* Remove bottom margin to stick image to the bottom */
+    background-color: #313338; /* Dark gray background */
+    border-radius: 5px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Styling the image */
+.image-container img {
+    max-width: 95%; /* Image will be smaller than the container width */
+    max-height: 100%; /* Image will not exceed the container height */
+    object-fit: contain; /* Ensures the image scales properly */
+    display: block;
+    border-radius: 5px;
+}
+
+/* Empty image containers for text-only boxes */
+.image-container.empty {
+    background-color: transparent; /* No background for empty image containers */
+}
+
+/* Colors for each advantage box */
+.green-box { background-color: #28a745; }
+.blue-box { background-color: #17a2b8; }
+.purple-box { background-color: #6f42c1; }
+.orange-box { background-color: #fd7e14; }
+.blue-box-light { background-color: #007bff; }
+.red-box { background-color: #dc3545; }
+
+/* Responsive adjustments */
+@media screen and (max-width: 900px) {
+    .premium-advantages {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row when the screen is smaller */
+        gap: 25px; /* Adjusted gap for smaller screens */
+    }
+
+    .advantage-box {
+        padding: 15px; /* Adjusted padding for smaller screens */
+        min-height: 180px; /* Further reduce the height */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    /* This breakpoint will handle scenarios where text occupies more space */
+    .premium-advantages {
+        grid-template-columns: 1fr; /* 1 item per row when the screen is even smaller */
+    }
+
+    .advantage-box {
+        width: 100%;
+        padding: 10px; /* Smaller padding */
+        min-height: 160px; /* Reduce height even further */
+    }
+
+    .image-container {
+        max-width: 100%; /* Adjust width to fit the screen */
+        height: auto;
+    }
+
+    .image-container img {
+        max-width: 100%;
+        max-height: 160px; /* Keep the image slightly larger for mobile */
+        object-fit: contain; /* Maintain image proportions */
+    }
+}
+
+/* ============================================================================================================================
+ * FOOTER STYLING
+ * ============================================================================================================================
+ */
+footer {
+    background-color: #2d2d2d;
+    color: #c778ff;
+    padding: 20px 0;
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 10px;
+}
+
+/* Footer Section Styling */
+.footer-section {
+    flex: 1;
+    min-width: 150px;
+    margin: 0 10px;
+}
+
+.footer-section h4 {
+    color: #c778ff;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 5px;
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #c778ff;
+}
+
+/* Footer Logo Section */
+.logo-link {
+    text-decoration: none;  /* Removes underlining from the link */
+    display: inline-flex;    /* Allows the logo and text to stay together */
+    align-items: center;     /* Aligns the image and text vertically */
+    cursor: pointer;         /* Changes the cursor to pointer to indicate it's clickable */
+}
+
+.logo-section {
+    flex: 1;
+    max-width: 250px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: -10px;
+}
+
+.footer-logo {
+    max-width: 180px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Copyright Section */
+#copyright {
+    margin-top: 20px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px;
+}
+
+/* ============================================================================================================================
+ * RESPONSIVE DESIGN
+ * ============================================================================================================================
+ */
+@media screen and (max-width: 768px) {
+    /* Hide desktop navigation and show mobile menu on smaller screens */
+    .nav-links {
+        display: none;
+    }
+
+    #menuhamburger {
+        display: block;
+        height: 35px;
+        width: 35px;
+    }
+
+    .header-container {
+        justify-content: space-between;
+    }
+
+    .support-button {
+        padding: 6px 14px;
+        font-size: 14px;
+    }
+
+    .logo-text {
+        font-size: 20px;
+    }
+
+    /* Footer responsive adjustments */
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-section {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .support-button {
+        padding: 5px 12px;
+        font-size: 12px;
+    }
+
+    .logo-text {
+        font-size: 18px;
+    }
+}
