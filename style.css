@@ -424,30 +424,16 @@ header {
  * MAIN CONTENT SECTION - PREMIUM
  * ============================================================================================================================
  */
- /* Style pour les liens à l'intérieur de la classe .highlight */
-.highlight a {
-    color: inherit; /* Hérite de la couleur du texte parent */
-    text-decoration: none; /* Supprime le soulignement */
-}
-
-.highlight a:hover {
-    text-decoration: none; /* Empêche le soulignement au survol */
-    color: inherit; /* Maintient la couleur lors du survol */
-}
-
-.premium-section {
+ .premium-section {
     width: 100%;
-    z-index: 2;
     margin-bottom: 2rem;
     margin-top: 2rem;
-    position: relative;
     padding: 50px 8%;
     text-align: center;
     color: white;
 }
 
 .premium-header h1 {
-    margin-top: 2rem;
     font-size: 48px;
     color: #c778ff;
     margin-bottom: 10px;
@@ -456,122 +442,145 @@ header {
 .premium-header p {
     font-size: 14px;
     margin-bottom: 15px;
+    line-height: 1.6;
 }
 
-.premium-header .highlight {
+.premium-header .highlight a {
     color: #c778ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.premium-header .highlight a:hover {
+    color: #ff00b0;
+    text-decoration: underline;
 }
 
 /* Premium Advantages Section */
 .premium-advantages {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 items per row by default */
-    gap: 40px; /* Increased gap to create more space on sides */
+    grid-template-columns: repeat(3, 1fr); /* Default 3 items per row */
+    gap: 60px; /* Increased vertical and horizontal space between items */
     margin-top: 2rem;
+    justify-items: center; /* Center align cards */
 }
 
-/* Set a reduced fixed height for all boxes */
-.advantage-box {
-    background-color: #404040;
-    padding: 20px 15px; /* Increased padding for all sides */
-    border-radius: 10px;
+/* Card Styling */
+.premium-card {
+    background: #1c1c1e; /* Dark background for the card */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for 3D effect */
+    width: 100%;
+    max-width: 350px; /* Fixed max width for consistency */
     text-align: center;
-    color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
-    min-height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ensures content is evenly distributed */
-}
-
-.advantage-box:hover {
-    transform: translateY(-10px); /* Moves the box upwards */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adds a shadow for 3D effect */
-}
-
-.advantage-box h3 {
-    font-size: 16px;
-    margin-bottom: 8px; /* Reduced margin between heading and text */
-}
-
-.advantage-box p {
-    font-size: 12px;
-    margin-bottom: 8px; /* Reduced margin between paragraph and image */
-    line-height: 1.5; /* Ensures better readability */
-    flex-grow: 1; /* Ensures the text grows evenly */
-}
-
-/* Conteneur de l'image */
-.image-container {
-    width: 90%; /* Reduce the width to give more spacing on the sides */
-    aspect-ratio: 16 / 9; /* Ensures a 16:9 aspect ratio for all images */
-    margin: 0 auto 0; /* Remove bottom margin to stick image to the bottom */
-    background-color: #313338; /* Dark gray background */
-    border-radius: 5px; /* Rounded corners */
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Styling the image */
-.image-container img {
-    max-width: 95%; /* Image will be smaller than the container width */
-    max-height: 100%; /* Image will not exceed the container height */
-    object-fit: contain; /* Ensures the image scales properly */
-    display: block;
-    border-radius: 5px;
+.premium-card:hover {
+    transform: translateY(-10px); /* Slight lift on hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow on hover */
 }
 
-/* Empty image containers for text-only boxes */
-.image-container.empty {
-    background-color: transparent; /* No background for empty image containers */
+/* Card Image */
+.premium-card img {
+    width: 100%; /* Full width of the container */
+    height: 200px; /* Fixed height for uniformity */
+    object-fit: cover; /* Ensures image covers the container while maintaining aspect ratio */
+    background-color: #262626; /* Background color for non-rectangular images */
+    display: block; /* Ensures no inline spacing affects the image */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
 }
 
-/* Colors for each advantage box */
-.green-box { background-color: #28a745; }
-.blue-box { background-color: #17a2b8; }
-.purple-box { background-color: #6f42c1; }
-.orange-box { background-color: #fd7e14; }
-.blue-box-light { background-color: #007bff; }
-.red-box { background-color: #dc3545; }
+/* Card Title */
+.premium-card h3 {
+    font-size: 20px;
+    color: #fff;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
 
-/* Responsive adjustments */
-@media screen and (max-width: 900px) {
+/* Card Description */
+.premium-card p {
+    font-size: 14px;
+    color: #ccc;
+    line-height: 1.6;
+    margin: 0 15px 15px;
+}
+
+/* Card Footer */
+.premium-card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #ccc;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
+    letter-spacing: 0.5px; /* Add slight spacing between letters */
+    word-spacing: 2px; /* Add slight spacing between words */
+}
+
+.premium-card-footer span {
+    margin: 0 10px;
+}
+
+/* Color Variants */
+.green-card {
+    border: 3px solid #28a745; /* Green border for green card */
+}
+
+.blue-card {
+    border: 3px solid #17a2b8; /* Blue border */
+}
+
+.yellow-card {
+    border: 3px solid #ffc107; /* Yellow border */
+}
+
+.red-card {
+    border: 3px solid #dc3545; /* Red border */
+}
+
+.purple-card {
+    border: 3px solid #6f42c1; /* Purple border */
+}
+
+.orange-card {
+    border: 3px solid #fd7e14; /* Orange border */
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1250px) {
     .premium-advantages {
-        grid-template-columns: repeat(2, 1fr); /* 2 items per row when the screen is smaller */
-        gap: 25px; /* Adjusted gap for smaller screens */
-    }
-
-    .advantage-box {
-        padding: 15px; /* Adjusted padding for smaller screens */
-        min-height: 180px; /* Further reduce the height */
+        grid-template-columns: repeat(2, 1fr); /* Switch to 2 items per row */
+        gap: 60px; /* Adjust spacing for smaller screens */
+        justify-items: center; /* Center the cards horizontally */
     }
 }
 
-@media screen and (max-width: 500px) {
-    /* This breakpoint will handle scenarios where text occupies more space */
+@media screen and (max-width: 800px) {
     .premium-advantages {
-        grid-template-columns: 1fr; /* 1 item per row when the screen is even smaller */
+        grid-template-columns: 1fr; /* Switch to 1 item per row */
+        gap: 60px; /* Maintain spacing between cards and rows */
+        justify-items: center; /* Center the cards horizontally */
     }
 
-    .advantage-box {
-        width: 100%;
-        padding: 10px; /* Smaller padding */
-        min-height: 160px; /* Reduce height even further */
+    .premium-card {
+        max-width: 350px; /* Keep the same size as on desktop */
+        width: 100%; /* Allow it to adjust for smaller screens */
+        margin: 0 auto; /* Center the card on the page */
+        padding: 0; /* Maintain consistent padding */
+        transition: transform 0.3s ease; /* Keep smooth hover effects */
     }
 
-    .image-container {
-        max-width: 100%; /* Adjust width to fit the screen */
-        height: auto;
-    }
-
-    .image-container img {
-        max-width: 100%;
-        max-height: 160px; /* Keep the image slightly larger for mobile */
-        object-fit: contain; /* Maintain image proportions */
+    .premium-card img {
+        width: 100%; /* Maintain the same width */
+        height: 200px; /* Maintain consistent height */
+        object-fit: cover; /* Ensure the image fills the space without distortion */
     }
 }
+
 
 /* ============================================================================================================================
  * FOOTER STYLING
