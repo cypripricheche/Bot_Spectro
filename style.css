@@ -460,9 +460,12 @@ header {
 .premium-advantages {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Default 3 items per row */
-    gap: 60px; /* Increased vertical and horizontal space between items */
+    gap: 70px; /* Augmented space between items and rows */
     margin-top: 2rem;
     justify-items: center; /* Center align cards */
+    max-width: 1400px; /* Increase the maximum width of the section */
+    margin-left: auto; /* Center the section */
+    margin-right: auto; /* Center the section */
 }
 
 /* Card Styling */
@@ -471,7 +474,7 @@ header {
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for 3D effect */
     width: 100%;
-    max-width: 350px; /* Fixed max width for consistency */
+    max-width: 450px; /* Increased max width for larger cards */
     text-align: center;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -485,7 +488,7 @@ header {
 /* Card Image */
 .premium-card img {
     width: 100%; /* Full width of the container */
-    height: 200px; /* Fixed height for uniformity */
+    height: 220px; /* Slightly taller for larger cards */
     object-fit: cover; /* Ensures image covers the container while maintaining aspect ratio */
     background-color: #262626; /* Background color for non-rectangular images */
     display: block; /* Ensures no inline spacing affects the image */
@@ -506,6 +509,11 @@ header {
     color: #ccc;
     line-height: 1.6;
     margin: 0 15px 15px;
+    text-align: center; /* Center the text horizontally */
+    display: flex; /* Use flexbox to align text */
+    align-items: center; /* Center the text vertically */
+    justify-content: center; /* Ensure the text is horizontally centered */
+    min-height: 50px; /* Adjust based on the height of two lines */
 }
 
 /* Card Footer */
@@ -551,15 +559,18 @@ header {
 }
 
 /* Responsive Adjustments */
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1650px) {
     .premium-advantages {
         grid-template-columns: repeat(2, 1fr); /* Switch to 2 items per row */
-        gap: 60px; /* Adjust spacing for smaller screens */
+        gap: 70px; /* Match the gap to the default (base) spacing */
+        max-width: 1000px; /* Limit the total width to match the spacing of the 3-card layout */
+        margin-left: auto; /* Center the grid */
+        margin-right: auto; /* Center the grid */
         justify-items: center; /* Center the cards horizontally */
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1150px) {
     .premium-advantages {
         grid-template-columns: 1fr; /* Switch to 1 item per row */
         gap: 60px; /* Maintain spacing between cards and rows */
@@ -567,7 +578,7 @@ header {
     }
 
     .premium-card {
-        max-width: 350px; /* Keep the same size as on desktop */
+        max-width: 400px; /* Slightly larger cards for small screens */
         width: 100%; /* Allow it to adjust for smaller screens */
         margin: 0 auto; /* Center the card on the page */
         padding: 0; /* Maintain consistent padding */
@@ -580,7 +591,6 @@ header {
         object-fit: cover; /* Ensure the image fills the space without distortion */
     }
 }
-
 
 /* ============================================================================================================================
  * FOOTER STYLING
