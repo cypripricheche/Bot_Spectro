@@ -326,105 +326,209 @@ header {
  * MAIN CONTENT SECTION - CLASH OF CLAN
  * ============================================================================================================================
  */
-/* Style for the ClashOfClan section and text */
-.clashofclan-section {
+
+/* General Section Styling */
+.clashofclan-steps {
     width: 100%;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    margin: 2rem auto;
     padding: 50px 8%;
     text-align: center;
     color: white;
 }
 
-.clashofclan-header h1 {
-    margin-top: 2rem;
-    font-size: 36px;
-    color: #c778ff;
-    margin-bottom: 1px; /* Set 1px space between title and text */
-    padding-bottom: 15px;
+/* Title and Description */
+.clashofclan-steps-header h1 {
+    font-size: 48px;
+    color: #c778ff; /* Matches the Premium section's title color */
+    margin-bottom: 10px;
 }
 
-.clashofclan-header p {
+.clashofclan-steps-header p {
     font-size: 16px;
-    margin-bottom: 30px;
+    color: #cccccc;
+    margin-bottom: 20px;
 }
 
-.clashofclan-header .highlight a {
-    color: #ff00b0;
+/* Tabs Navigation */
+.clashofclan-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
 }
 
-.clashofclan-header .bouton a {
-    color: #439eff;
+.tab-button {
+    background-color: #262626; /* Matches card background */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.clashofclan-header .alerte-premium {
-    color: #ff0000;
-}
-
-.clashofclan-header .premium a {
+.tab-button.active {
+    background-color: transparent;
+    border-color: #c778ff; /* Matches the highlight color of the Premium section */
     color: #c778ff;
-    text-decoration: none; /* Supprime le soulignement */
+    font-weight: bold;
 }
 
-/* Container for the command section */
-.SectionClashOfClan {
-    width: 100%;
-    margin-top: 30px;
+.tab-button:hover {
+    background-color: #c778ff;
+    color: white;
 }
 
-.SectionClashOfClanContainer {
-    width: 100%;
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Steps Container */
+.clashofclan-steps-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Default: 3 cards per row */
+    gap: 70px; /* Matches the spacing from the Premium section */
+    justify-items: center;
+    max-width: 1400px; /* Centered container with max width */
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Command Image Container */
-.command-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Step Card */
+.step-card {
+    background: #1c1c1e; /* Matches the card background color from the Premium section */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    width: 100%;
+    max-width: 450px; /* Fixed max width for cards */
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+}
+
+.step-card:hover {
+    transform: translateY(-10px); /* Hover effect */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+}
+
+/* Step Image */
+.step-card img {
+    width: 100%; /* Full width of the container */
+    height: 220px; /* Matches the Premium section's card image height */
+    object-fit: cover; /* Ensure image fills container without distortion */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Step Title */
+.step-card h2 {
+    font-size: 20px;
+    color: #ffffff;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.command-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid #2d2d2d;
-}
-
-/* Footer text below the image */
-.command-footer {
-    text-align: center;
-    margin-top: 10px;
-    padding-bottom: 50px;
-}
-
-.command-footer p {
+/* Step Description */
+.step-card p {
     font-size: 14px;
     color: #cccccc;
+    line-height: 1.6;
+    margin: 0 15px 15px;
+    text-align: center;
 }
 
-/* Styling for responsiveness */
-@media screen and (max-width: 800px) {
-    .clashofclan-header h1 {
-        font-size: 28px;
-    }
-    
-    .clashofclan-header p {
-        font-size: 14px;
-    }
+/* Highlighted Text */
+.highlight {
+    color: #c778ff; /* Matches the Premium section's highlight color */
+    font-weight: bold;
+}
 
-    .command-footer p {
-        font-size: 12px;
+
+/* Step Badge with Diagonal Style */
+.step-badge {
+    position: absolute;
+    top: 15px; /* Keep the vertical alignment consistent */
+    left: -25px; /* Adjust for the overall position of the badge */
+    background-color: white;
+    color: #1c1c1e;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px 30px; /* Balanced padding for spacing */
+    text-align: center; /* Ensure the text remains centered within the badge */
+    transform: rotate(-45deg); /* Rotate to make it diagonal */
+    transform-origin: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    border-radius: 5px;
+    line-height: 1.2; /* Improve text alignment and spacing */
+    padding-left: 26px; /* Shift the text 1px to the left */
+}
+
+
+/* Step Card */
+.step-card {
+    background: #1c1c1e; /* Matches the card background color */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    width: 100%;
+    max-width: 450px; /* Fixed max width for cards */
+    text-align: center;
+    overflow: hidden;
+    position: relative; /* Necessary for positioning the badge */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 20px;
+}
+
+.step-card:hover {
+    transform: translateY(-10px); /* Hover effect */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+}
+
+/* Step Image */
+.step-card img {
+    width: 100%; /* Full width of the container */
+    height: 220px; /* Matches the Premium section's card image height */
+    object-fit: cover; /* Ensure image fills container without distortion */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1650px) {
+    .clashofclan-steps-container {
+        grid-template-columns: repeat(2, 1fr); /* Switch to 2 items per row */
+        gap: 70px; /* Maintain spacing between cards */
+        max-width: 1000px; /* Limit the total width */
+        margin-left: auto;
+        margin-right: auto;
     }
 }
+
+@media screen and (max-width: 1150px) {
+    .clashofclan-steps-container {
+        grid-template-columns: 1fr; /* Switch to 1 item per row */
+        gap: 60px; /* Maintain spacing between cards */
+        max-width: 400px; /* Match card width */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
 
 /* ============================================================================================================================
  * MAIN CONTENT SECTION - PREMIUM
  * ============================================================================================================================
  */
- .premium-section {
+
+.premium-section {
     width: 100%;
     margin-bottom: 2rem;
     margin-top: 2rem;
