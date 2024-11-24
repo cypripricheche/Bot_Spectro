@@ -260,7 +260,7 @@ header {
 
 .teamContainer {
     width: 500px; /* Largeur augmentée */
-    height: 320px; /* Hauteur conservée */
+    height: 250px; /* Hauteur conservée */
     position: relative;
     border-radius: 15px;
     overflow: hidden;
@@ -320,11 +320,11 @@ header {
 
     .teamContainer {
         width: 450px; /* Ajustement pour garder une bonne proportion */
-        height: 320px; /* Hauteur inchangée */
+        height: 250px; /* Hauteur inchangée */
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1150px) {
     .teamsContainer {
         flex-direction: column; /* Passe en colonne sur petits écrans */
         align-items: center;
@@ -333,7 +333,7 @@ header {
     .teamContainer {
         width: 100%; /* Largeur totale pour petits écrans */
         max-width: 450px; /* Largeur maximale définie */
-        height: 320px; /* Hauteur inchangée */
+        height: 250px; /* Hauteur inchangée */
     }
 }
 
