@@ -121,10 +121,11 @@ header {
     display: none;
 }
 
-/* ============================================================================================================================
- * MENU RESPONSIVE
- * ============================================================================================================================
- */
+/* ============================================================================================================================ *
+ *                                                                                                                              *
+ *                                                         Menu Responsive                                                      *
+ *                                                                                                                              *
+ * ============================================================================================================================ */
 
 /* Activate the mobile menu when screen width is below 1000px (when images stack vertically) */
 @media (max-width:1000px) {
@@ -201,108 +202,146 @@ header {
     }
 }
 
-/* ============================================================================================================================
- * MAIN CONTENT STYLING (Teams Section Replaces the Description Section)
- * ============================================================================================================================
- */
- .teamsSection {
-    width: 100%;
-    height: auto;
-    z-index: 2;
+/* ============================================================================================================================ *
+ *                                                                                                                              *
+ *                                                             ACCUEIL                                                          *
+ *                                                                                                                              *
+ * ============================================================================================================================ */
+
+/* Header Section Styling */
+.accueil-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.accueil-header h1 {
+    font-size: 48px;
+    color: #c778ff;
+    margin-bottom: 10px;
+}
+
+.accueil-header p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #cccccc;
+}
+
+.accueil-header .highlight a {
+    color: #c778ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.accueil-header .highlight a:hover {
+    color: #ff00b0;
+    text-decoration: underline;
+}
+
+/* Teams Section Styling */
+.teamsSection {
+    padding-top: 50px; /* Ajout d'espace interne au conteneur */
     margin-bottom: 5rem;
     margin-top: 2rem;
     position: relative;
 }
 
 .teamsSectionContainer {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    max-width: 1400px; /* Augmenté pour permettre des conteneurs plus larges */
+    margin: 4rem auto; /* Ajout d'une marge verticale plus importante */
 }
 
 .teamsContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding-top: 9%; /* Adjust padding as necessary */
+    gap: 2rem; /* Espace entre les conteneurs */
 }
 
 .teamContainer {
-    width: 33%;
-    height: 300px; /* Consistent height for all containers */
+    width: 500px; /* Largeur augmentée */
+    height: 320px; /* Hauteur conservée */
     position: relative;
-    margin-right: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 15px;
     overflow: hidden;
-    border-radius: 20px;
     cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-top: 10px; /* Ajout d'espace interne pour alignement */
 }
 
-.teamContainer:last-child {
-    margin-right: 0;
+.teamContainer:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Uniform sizing and coverage for background images */
 .teamBackgroundImage {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  /* Ensures image covers container while maintaining aspect ratio */
-    object-position: center;
-    filter: grayscale(1) brightness(0.4); /* Applies grayscale and brightness filter */
-    transition: all 0.5s ease; /* Smooth transition on hover */
+    width: 100%; /* Ajuste à la largeur du conteneur */
+    height: 100%; /* S'assure que l'image couvre toute la hauteur du conteneur */
+    object-fit: cover; /* Ajuste l'image pour remplir le conteneur */
+    filter: brightness(0.6);
+    transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .teamContainer:hover .teamBackgroundImage {
-    transform: scale(1.1);  /* Scales the image slightly on hover */
-    filter: none;  /* Removes filter on hover */
+    filter: brightness(0.8);
+    transform: scale(1.1);
 }
 
-/* Consistent logo positioning and size */
-.gameLogo {
+.teamOverlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%; /* Adjust size if needed */
-    height: auto;
-    filter: drop-shadow(0 0 9px black);
+    bottom: 0;
+    left: 0;
+    width: 100%; /* S'assure que l'overlay couvre le conteneur */
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    text-align: left;
 }
 
-/* Mobile layout adjustments */
-@media (max-width: 1000px) {
+.teamYear {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.teamTitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1650px) {
     .teamsContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Centre les conteneurs horizontalement */
-        margin-top: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
     }
 
     .teamContainer {
-        width: 100%;
-        max-width: 90%; /* Limite la largeur des conteneurs */
-        margin-left: auto;
-        margin-right: auto;
-        height: 200px; /* Ajuste la hauteur pour les petits écrans */
-        margin-bottom: 1.5rem;
-    }
-
-    .teamContainer:first-child {
-        margin-top: 4rem; /* Ajoute un espace au-dessus de la première image */
-    }
-
-    .teamContainer:last-child {
-        margin-bottom: 0;
-        margin-right: auto;
+        width: 450px; /* Ajustement pour garder une bonne proportion */
+        height: 320px; /* Hauteur inchangée */
     }
 }
 
-/* ============================================================================================================================
- * MAIN CONTENT SECTION - DISCORD & CLASH OF CLAN
- * ============================================================================================================================
- */
+@media screen and (max-width: 768px) {
+    .teamsContainer {
+        flex-direction: column; /* Passe en colonne sur petits écrans */
+        align-items: center;
+    }
+
+    .teamContainer {
+        width: 100%; /* Largeur totale pour petits écrans */
+        max-width: 450px; /* Largeur maximale définie */
+        height: 320px; /* Hauteur inchangée */
+    }
+}
+
+/* ============================================================================================================================ *
+ *                                                                                                                              *
+ *                                                    Discord / Clash Of Clans                                                  *
+ *                                                                                                                              *
+ * ============================================================================================================================ */
 
 /* General Section Styling */
 .clashofclan-steps {
@@ -500,10 +539,11 @@ header {
 
 
 
-/* ============================================================================================================================
- * MAIN CONTENT SECTION - PREMIUM
- * ============================================================================================================================
- */
+/* ============================================================================================================================ *
+ *                                                                                                                              *
+ *                                                             PREMIUM                                                          *
+ *                                                                                                                              *
+ * ============================================================================================================================ */
 
 .premium-section {
     width: 100%;
@@ -673,10 +713,11 @@ header {
     }
 }
 
-/* ============================================================================================================================
- * FOOTER STYLING
- * ============================================================================================================================
- */
+/* ============================================================================================================================ *
+ *                                                                                                                              *
+ *                                                             FOOTER                                                           *
+ *                                                                                                                              *
+ * ============================================================================================================================ */
 footer {
     background-color: #2d2d2d;
     color: #c778ff;
