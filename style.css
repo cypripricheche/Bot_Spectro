@@ -471,7 +471,7 @@ header {
 .step-badge {
     position: absolute;
     top: 20px; /* Alignement vertical */
-    left: -25px; /* Positionnement à gauche */
+    left: -30px; /* Positionnement à gauche */
     background-color: white;
     color: #1c1c1e;
     font-size: 14px;
