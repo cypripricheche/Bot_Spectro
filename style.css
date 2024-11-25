@@ -470,22 +470,29 @@ header {
 /* Step Badge with Diagonal Style */
 .step-badge {
     position: absolute;
-    top: 15px; /* Keep the vertical alignment consistent */
-    left: -25px; /* Adjust for the overall position of the badge */
+    top: 20px; /* Alignement vertical */
+    left: -25px; /* Positionnement à gauche */
     background-color: white;
     color: #1c1c1e;
     font-size: 14px;
     font-weight: bold;
-    padding: 3px 30px; /* Balanced padding for spacing */
-    text-align: center; /* Ensure the text remains centered within the badge */
-    transform: rotate(-45deg); /* Rotate to make it diagonal */
+    padding: 3px 60px; /* Réduction du padding */
+    text-align: center;
+    transform: rotate(-45deg); /* Inclinaison */
     transform-origin: center;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 2;
     border-radius: 5px;
-    line-height: 1.2; /* Improve text alignment and spacing */
-    padding-left: 26px; /* Shift the text 1px to the left */
+    line-height: 1.2; /* Améliore l'espacement vertical du texte */
+    display: flex; /* Flexbox pour gérer les textes longs */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    white-space: nowrap; /* Empêche le retour à la ligne */
+    overflow: hidden; /* Coupe le contenu qui dépasse */
+    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
+    max-width: 100px; /* Largeur maximale pour limiter les mots longs */
 }
+
 
 
 /* Step Card */
