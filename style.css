@@ -245,7 +245,7 @@ header {
 
 /* Card Styling */
 .teamCard {
-    background-color: #1c1c1e;
+    background-color: #272727;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -321,7 +321,7 @@ header {
 /* Title and Description */
 .clashofclan-steps-header h1 {
     font-size: 48px;
-    color: #c778ff; /* Matches the Premium section's title color */
+    color: #c778ff;
     margin-bottom: 10px;
 }
 
@@ -340,7 +340,7 @@ header {
 }
 
 .tab-button {
-    background-color: #262626; /* Matches card background */
+    background-color: #262626;
     color: #ffffff;
     padding: 10px 20px;
     border: 2px solid transparent;
@@ -352,7 +352,7 @@ header {
 
 .tab-button.active {
     background-color: transparent;
-    border-color: #c778ff; /* Matches the highlight color of the Premium section */
+    border-color: #c778ff;
     color: #c778ff;
     font-weight: bold;
 }
@@ -374,21 +374,21 @@ header {
 /* Steps Container */
 .clashofclan-steps-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Default: 3 cards per row */
-    gap: 70px; /* Matches the spacing from the Premium section */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 70px;
     justify-items: center;
-    max-width: 1400px; /* Centered container with max width */
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
 }
 
 /* Step Card */
 .step-card {
-    background: #1c1c1e; /* Matches the card background color from the Premium section */
+    background: #1c1c1e;
     border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 450px; /* Fixed max width for cards */
+    max-width: 450px;
     text-align: center;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -396,15 +396,15 @@ header {
 }
 
 .step-card:hover {
-    transform: translateY(-10px); /* Hover effect */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); 
 }
 
 /* Step Image */
 .step-card img {
-    width: 100%; /* Full width of the container */
-    height: 220px; /* Matches the Premium section's card image height */
-    object-fit: cover; /* Ensure image fills container without distortion */
+    width: 100%;
+    height: 220px; 
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
 }
@@ -428,7 +428,7 @@ header {
 
 /* Highlighted Text */
 .highlight {
-    color: #c778ff; /* Matches the Premium section's highlight color */
+    color: #c778ff;
     font-weight: bold;
 }
 
@@ -436,55 +436,55 @@ header {
 /* Step Badge with Diagonal Style */
 .step-badge {
     position: absolute;
-    top: 20px; /* Alignement vertical */
-    left: -30px; /* Positionnement à gauche */
+    top: 20px;
+    left: -30px;
     background-color: white;
     color: #1c1c1e;
     font-size: 14px;
     font-weight: bold;
-    padding: 3px 60px; /* Réduction du padding */
+    padding: 3px 60px;
     text-align: center;
-    transform: rotate(-45deg); /* Inclinaison */
+    transform: rotate(-45deg);
     transform-origin: center;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 2;
     border-radius: 5px;
-    line-height: 1.2; /* Améliore l'espacement vertical du texte */
-    display: flex; /* Flexbox pour gérer les textes longs */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
-    white-space: nowrap; /* Empêche le retour à la ligne */
-    overflow: hidden; /* Coupe le contenu qui dépasse */
-    text-overflow: ellipsis; /* Ajoute "..." si le texte dépasse */
-    max-width: 100px; /* Largeur maximale pour limiter les mots longs */
+    line-height: 1.2; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 100px;
 }
 
 
 
 /* Step Card */
 .step-card {
-    background: #1c1c1e; /* Matches the card background color */
+    background: #1c1c1e;
     border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 450px; /* Fixed max width for cards */
+    max-width: 450px;
     text-align: center;
     overflow: hidden;
-    position: relative; /* Necessary for positioning the badge */
+    position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     padding: 20px;
 }
 
 .step-card:hover {
-    transform: translateY(-10px); /* Hover effect */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow */
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
 }
 
 /* Step Image */
 .step-card img {
-    width: 100%; /* Full width of the container */
-    height: 220px; /* Matches the Premium section's card image height */
-    object-fit: cover; /* Ensure image fills container without distortion */
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
 }
@@ -492,9 +492,9 @@ header {
 /* Responsive Adjustments */
 @media screen and (max-width: 1650px) {
     .clashofclan-steps-container {
-        grid-template-columns: repeat(2, 1fr); /* Switch to 2 items per row */
-        gap: 70px; /* Maintain spacing between cards */
-        max-width: 1000px; /* Limit the total width */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 70px;
+        max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -502,9 +502,9 @@ header {
 
 @media screen and (max-width: 1150px) {
     .clashofclan-steps-container {
-        grid-template-columns: 1fr; /* Switch to 1 item per row */
-        gap: 60px; /* Maintain spacing between cards */
-        max-width: 400px; /* Match card width */
+        grid-template-columns: 1fr;
+        gap: 60px;
+        max-width: 400px;
         margin-left: auto;
         margin-right: auto;
     }
