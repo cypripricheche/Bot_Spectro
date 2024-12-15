@@ -10,7 +10,6 @@ menu_toggle.onclick = function() {
     menu.classList.toggle('responsive');
 }
 
-
 // ============================================================================================================================
 // OPTION - CLASH OF CLAN
 // ============================================================================================================================
@@ -26,4 +25,49 @@ document.querySelectorAll('.tab-button').forEach(button => {
         const target = button.getAttribute('data-target');
         document.getElementById(target).classList.add('active');
     });
+});
+
+
+// ============================================================================================================================
+// OPTION - RECRUTEMENT
+// ============================================================================================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".clanGridContainer");
+
+    async function fetchClans() {
+        try {
+            const response = await fetch('/api/clans');
+            const result = await response.json();
+            console.log(result); // Debugging
+
+            container.innerHTML = '';
+            if (result.status === "success" && result.data.length > 0) {
+                result.data.forEach(clan => {
+                    const card = document.createElement('div');
+                    card.classList.add('clanCard');
+                    card.innerHTML = `
+                        <div class="clanDate">${new Date(clan.publication_date).toLocaleString()}</div>
+                        <div class="clanContent">
+                            <h2 class="clanTitle">#${clan.clan_id}</h2>
+                            <p class="clanDescription">${clan.description}</p>
+                        </div>
+                        <div class="clanBadges">
+                            <span class="badge">Actif</span>
+                            <span class="badge">Guerres</span>
+                            <span class="badge">Sérieux</span>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } else {
+                container.innerHTML = '<p style="color: red;">Aucun clan trouvé.</p>';
+            }
+        } catch (error) {
+            console.error("Erreur :", error);
+            container.innerHTML = '<p style="color: red;">Impossible de charger les clans.</p>';
+        }
+    }
+
+    fetchClans();
 });
