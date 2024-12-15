@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <!-- Meta Information and Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page Title -->
+    <title>Spectro</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://upload.skybot.fr/uploads/67193061a036c9.69417753.png" type="image/png">
+
+    <!-- Google Fonts and CSS Stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
+</head>
+<body>
+
+    <!-- ============================================================================================================================
+     * HEADER SECTION
+     * ============================================================================================================================
+     -->
+
+    <header>
+        <div class="header-container">
+            <!-- Logo Section -->
+            <a href="index.html" class="logo-link">
+                <div class="logo-section">
+                    <img id="logo" src="https://upload.skybot.fr/uploads/67193061a036c9.69417753.png" alt="Spectro Logo">
+                    <span class="logo-text">SPECTRO</span>
+                </div>
+            </a>            
+
+            <!-- Navigation Menu -->
+            <div class="menu_toggle"></div>
+            <nav class="menu">
+                <a href="discord.html">DISCORD</a>
+                <a href="clashofclan.html">CLASH OF CLANS</a>
+                <a href="premium.html">PREMIUM</a>
+                <a href="recrutement_clans.html">RECRUTEMENT CLANS</a>
+            </nav>
+
+            <!-- Support Button -->
+            <div class="support-section">
+                <a href="https://discord.gg/ZvBqwHQdS8" target="_blank">
+                    <button class="support-button">SUPPORT</button>
+                </a>
+            </div>            
+        </div>
+    </header>
+
+    <!-- ============================================================================================================================
+     * MAIN CONTENT SECTION
+     * ============================================================================================================================
+     -->
+
+    <div class="clanSection">
+        <div class="clan-header">
+            <h1>RECRUTEMENT CLANS</h1>
+            <p>Découvrez les clans à la recherche de nouveaux joueurs !</p>
+        </div>
+    
+        <!-- Grille des clans -->
+        <div class="clanGridContainer">
+            {% for clan in clans %}
+            <div class="clanCard">
+                <!-- Date de publication -->
+                <div class="clanDate">
+                    {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}
+                </div>
+                
+                <!-- Contenu principal du clan -->
+                <div class="clanContent">
+                    <!-- Titre avec ID du clan -->
+                    <h2 class="clanTitle">#{{ clan.clan_id }}</h2>
+                    <!-- Description du clan -->
+                    <p class="clanDescription">
+                        {{ clan.description }}
+                    </p>
+                </div>
+    
+                <!-- Badges -->
+                <div class="clanBadges">
+                    <span class="badge">Actif</span>
+                    <span class="badge">Guerres</span>
+                    <span class="badge">Sérieux</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+
+    <!--
+    <div class="clanSection">
+        <div class="clan-header">
+            <h1>RECRUTEMENT CLANS</h1>
+            <p>Découvrez les clans à la recherche de nouveaux joueurs !</p>
+        </div>
+    
+        <div class="clanGridContainer">
+
+            <div class="clanCard">
+                <div class="clanDate">3h</div>
+                <div class="clanContent">
+                    <h2>#12345678</h2>
+                    <p class="clanDescription">
+                        Bienvenue dans le clan <span class="highlight">Warriors</span>. Nous recrutons pour des guerres intenses et compétitives.
+                    </p>
+                </div>
+                <div class="clanBadges">
+                    <span class="badge">GDC</span>
+                    <span class="badge">Actif</span>
+                    <span class="badge">Top 500</span>
+                </div>
+            </div>
+    
+
+            <div class="clanCard">
+                <div class="clanDate">1 jour</div>
+                <div class="clanContent">
+                    <h2>#87654321</h2>
+                    <p class="clanDescription">
+                        Recrutement ouvert pour <span class="highlight">Legends</span>. Objectif : grimper dans les ligues de clan.
+                    </p>
+                </div>
+                <div class="clanBadges">
+                    <span class="badge">Ligue</span>
+                    <span class="badge">Elite</span>
+                </div>
+            </div>
+    
+
+            <div class="clanCard">
+                <div class="clanDate">5 jours</div>
+                <div class="clanContent">
+                    <h2>#11223344</h2>
+                    <p class="clanDescription">
+                        Le clan <span class="highlight">Fighters</span> recrute des membres sérieux pour des guerres quotidiennes.
+                    </p>
+                </div>
+                <div class="clanBadges">
+                    <span class="badge">Sérieux</span>
+                    <span class="badge">Français</span>
+                    <span class="badge">Compétitif</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <!-- ============================================================================================================================
+     * FOOTER SECTION
+     * ============================================================================================================================
+     -->
+    <footer>
+        <div class="footer-container">
+            <!-- Footer Logo -->
+            <div class="footer-section logo-section">
+                <img class="footer-logo" src="https://upload.skybot.fr/uploads/67193061a036c9.69417753.png" alt="DraftBot Logo">
+            </div>
+
+            <!-- Footer Navigation Links -->
+            <div class="footer-section">
+                <h4>NAVIGATION</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                    <li><a href="clashofclan.html">Clash Of Clans</a></li>
+                    <li><a href="premium.html">Premium</a></li>
+                    <li><a href="recrutement_clans.html">Recrutement Clans</a></li>
+                    <li><a href="#">Documents légaux</a></li>
+                </ul>
+            </div>
+
+            <!-- Community Links in Footer -->
+            <div class="footer-section">
+                <h4>COMMUNAUTÉ</h4>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Évenement</a></li>
+                    <li><a href="#">Support Discord</a></li>
+                    <li><a href="#">Équipe</a></li>
+                </ul>
+            </div>
+
+            <!-- Footer Partners Links -->
+            <div class="footer-section">
+                <h4>PARTENAIRES</h4>
+                <ul>
+                    <li><a href="#">Cyprien</a></li>
+                    <li><a href="#">Loup Solitaire</a></li>
+                    <li><a href="#">John Chibe</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright Section -->
+        <div id="copyright">
+            <span>Copyright © 2024 - 2025 Spectro. Tous droits réservés.</span>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
