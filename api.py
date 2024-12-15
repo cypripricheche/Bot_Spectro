@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify, render_template_string
+from flask import Flask, send_file, send_from_directory, render_template_string, jsonify
 import mysql.connector
 from mysql.connector import Error
 
@@ -21,48 +21,78 @@ def get_db_connection():
         print(f"Erreur de connexion : {e}")
         return None
 
-# Route pour la page d'accueil
+# ===== ROUTES POUR LES PAGES =====
 @app.route('/')
 @app.route('/index.html')
 def home():
+    """Page d'accueil."""
     return send_file("index.html")
 
-# Route pour la page recrutement_clans
 @app.route('/recrutement_clans.html')
 def recrutement_clans():
-    conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT clan_id, description, publication_date FROM recrutement_clans")
-    clans = cursor.fetchall()
-    cursor.close()
-    conn.close()
+    """Page de recrutement avec données de la base."""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT clan_id, description, publication_date FROM recrutement_clans")
+        clans = cursor.fetchall()
+        cursor.close()
+        conn.close()
 
-    with open("recrutement_clans.html", "r", encoding="utf-8") as file:
-        template = file.read()
+        # Lire le template HTML
+        with open("recrutement_clans.html", "r", encoding="utf-8") as file:
+            template = file.read()
 
-    return render_template_string(template, clans=clans)
+        return render_template_string(template, clans=clans)
+    except Exception as e:
+        return f"Erreur lors de la récupération des données : {str(e)}"
 
-# Routes pour les autres pages statiques
 @app.route('/clashofclan.html')
 def clashofclan():
+    """Page Clash of Clans."""
     return send_file("clashofclan.html")
 
 @app.route('/discord.html')
 def discord():
+    """Page Discord."""
     return send_file("discord.html")
 
 @app.route('/premium.html')
 def premium():
+    """Page Premium."""
     return send_file("premium.html")
 
-# Routes pour CSS et JS
+# ===== ROUTES POUR LES FICHIERS STATIQUES =====
 @app.route('/style.css')
 def style():
+    """Fichier CSS."""
     return send_file("style.css")
 
 @app.route('/script.js')
 def script():
+    """Fichier JavaScript."""
     return send_file("script.js")
+
+# ===== ROUTES POUR LES IMAGES =====
+@app.route('/<path:filename>')
+def static_files(filename):
+    """Servir les images statiques et autres fichiers."""
+    return send_from_directory('.', filename)
+
+# ===== ROUTE API =====
+@app.route('/api/clans')
+def get_clans():
+    """Récupération des données des clans via l'API."""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT clan_id, description, publication_date FROM recrutement_clans")
+        clans = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return jsonify({"status": "success", "data": clans})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
