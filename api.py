@@ -1,6 +1,6 @@
-from flask import Flask, send_file, jsonify
-import mysql.connector
-from mysql.connector import Error
+from        flask               import Flask, render_template, send_from_directory, jsonify
+import      mysql.connector
+from        mysql.connector     import Error
 
 app = Flask(__name__)
 
@@ -30,20 +30,35 @@ def get_clans():
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT clan_id, description, publication_date FROM recrutement_clans")
         clans = cursor.fetchall()
-        return {"status": "success", "data": clans}
+        return jsonify({"status": "success", "data": clans})
     except Exception as e:
         print(f"Erreur : {e}")
-        return {"status": "error", "message": str(e)}
+        return jsonify({"status": "error", "message": str(e)})
     finally:
         if conn and conn.is_connected():
             cursor.close()
             conn.close()
 
-# Route pour servir le fichier HTML directement
-@app.route('/recrutement_clans')
-def display_page():
-    """Affiche directement le fichier HTML sans render_template."""
-    return send_file("recrutement_clans.html")
+# Route principale pour servir la page HTML
+@app.route('/')
+def home():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT clan_id, description, publication_date FROM recrutement_clans")
+    clans = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render_template('recrutement_clans.html', clans=clans)
+
+
+# Routes pour les fichiers statiques (CSS et JS)
+@app.route('/style.css')
+def serve_css():
+    return send_from_directory('.', 'style.css')
+
+@app.route('/script.js')
+def serve_js():
+    return send_from_directory('.', 'script.js')
 
 if __name__ == '__main__':
     app.run(debug=True)
