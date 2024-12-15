@@ -1,8 +1,8 @@
-from        flask               import Flask, render_template, send_from_directory, jsonify
-import      mysql.connector
-from        mysql.connector     import Error
+from flask import Flask, send_file, jsonify, render_template_string
+import mysql.connector
+from mysql.connector import Error
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=".", template_folder=".")  # Force Flask à chercher les fichiers ici
 
 # Configuration de la base de données
 db_config = {
@@ -30,16 +30,16 @@ def get_clans():
         cursor = conn.cursor(dictionary=True)
         cursor.execute("SELECT clan_id, description, publication_date FROM recrutement_clans")
         clans = cursor.fetchall()
-        return jsonify({"status": "success", "data": clans})
+        return {"status": "success", "data": clans}
     except Exception as e:
         print(f"Erreur : {e}")
-        return jsonify({"status": "error", "message": str(e)})
+        return {"status": "error", "message": str(e)}
     finally:
         if conn and conn.is_connected():
             cursor.close()
             conn.close()
 
-# Route principale pour servir la page HTML
+# Route principale pour afficher le HTML directement
 @app.route('/')
 def home():
     conn = get_db_connection()
@@ -48,17 +48,22 @@ def home():
     clans = cursor.fetchall()
     cursor.close()
     conn.close()
-    return render_template('recrutement_clans.html', clans=clans)
 
+    # Lecture directe du fichier HTML pour éviter render_template()
+    with open("recrutement_clans.html", "r", encoding="utf-8") as file:
+        template = file.read()
 
-# Routes pour les fichiers statiques (CSS et JS)
+    # Retourner le HTML avec les données intégrées via render_template_string
+    return render_template_string(template, clans=clans)
+
+# Routes pour CSS et JS
 @app.route('/style.css')
-def serve_css():
-    return send_from_directory('.', 'style.css')
+def style():
+    return send_file("style.css")
 
 @app.route('/script.js')
-def serve_js():
-    return send_from_directory('.', 'script.js')
+def script():
+    return send_file("script.js")
 
 if __name__ == '__main__':
     app.run(debug=True)
