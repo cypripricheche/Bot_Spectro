@@ -83,12 +83,12 @@ function formatTimeAgo(date) {
         return `${diffInSeconds}m`;
     } else if (diffInSeconds < 3600) {
         const minutes = Math.floor(diffInSeconds / 60);
-        return `${minutes}m`;
+        return `${minutes} M`;
     } else if (diffInSeconds < 86400) {
         const hours = Math.floor(diffInSeconds / 3600);
-        return `${hours}h`;
+        return `${hours} H`;
     } else {
         const days = Math.floor(diffInSeconds / 86400);
-        return `${days}j`;
+        return `${days} J`;
     }
 }

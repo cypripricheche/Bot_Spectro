@@ -59,33 +59,33 @@
      * MAIN CONTENT SECTION
      * ============================================================================================================================
      -->
-
+    
     <div class="clanSection">
         <div class="clan-header">
             <h1>RECRUTEMENT CLANS</h1>
             <p>Découvrez les clans à la recherche de nouveaux joueurs !</p>
         </div>
-    
-        <!-- Grille des clans -->
+
         <div class="clanGridContainer">
             {% for clan in clans %}
             <div class="clanCard">
-                <!-- Date de publication -->
+
+                <div class="clanImage">
+                    <img src="Images_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
+                </div>
+
+
                 <div class="clanDate">
-                    {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}
+                    🕒 {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}
                 </div>
-                
-                <!-- Contenu principal du clan -->
+
+
                 <div class="clanContent">
-                    <!-- Titre avec ID du clan -->
                     <h2 class="clanTitle">{{ clan.clan_id }}</h2>
-                    <!-- Description du clan -->
-                    <p class="clanDescription">
-                        {{ clan.description }}
-                    </p>
+                    <p class="clanDescription">{{ clan.description }}</p>
                 </div>
-    
-                <!-- Badges -->
+
+
                 <div class="clanBadges">
                     <span class="badge">Actif</span>
                     <span class="badge">Guerres</span>
@@ -98,63 +98,8 @@
     
 
 
-    <!--
-    <div class="clanSection">
-        <div class="clan-header">
-            <h1>RECRUTEMENT CLANS</h1>
-            <p>Découvrez les clans à la recherche de nouveaux joueurs !</p>
-        </div>
     
-        <div class="clanGridContainer">
-
-            <div class="clanCard">
-                <div class="clanDate">3h</div>
-                <div class="clanContent">
-                    <h2>#12345678</h2>
-                    <p class="clanDescription">
-                        Bienvenue dans le clan <span class="highlight">Warriors</span>. Nous recrutons pour des guerres intenses et compétitives.
-                    </p>
-                </div>
-                <div class="clanBadges">
-                    <span class="badge">GDC</span>
-                    <span class="badge">Actif</span>
-                    <span class="badge">Top 500</span>
-                </div>
-            </div>
     
-
-            <div class="clanCard">
-                <div class="clanDate">1 jour</div>
-                <div class="clanContent">
-                    <h2>#87654321</h2>
-                    <p class="clanDescription">
-                        Recrutement ouvert pour <span class="highlight">Legends</span>. Objectif : grimper dans les ligues de clan.
-                    </p>
-                </div>
-                <div class="clanBadges">
-                    <span class="badge">Ligue</span>
-                    <span class="badge">Elite</span>
-                </div>
-            </div>
-    
-
-            <div class="clanCard">
-                <div class="clanDate">5 jours</div>
-                <div class="clanContent">
-                    <h2>#11223344</h2>
-                    <p class="clanDescription">
-                        Le clan <span class="highlight">Fighters</span> recrute des membres sérieux pour des guerres quotidiennes.
-                    </p>
-                </div>
-                <div class="clanBadges">
-                    <span class="badge">Sérieux</span>
-                    <span class="badge">Français</span>
-                    <span class="badge">Compétitif</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
 
     <!-- ============================================================================================================================
      * FOOTER SECTION
