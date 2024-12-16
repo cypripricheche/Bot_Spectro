@@ -37,32 +37,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function fetchClans() {
         try {
-            const response = await fetch('/api/clans'); // Appel de l'API pour récupérer les données
+            const response = await fetch('/api/clans');
             const result = await response.json();
-            console.log(result); // Debugging pour vérifier les données dans la console
+            console.log(result); // Debugging
 
-            container.innerHTML = ''; // On vide le container avant d'ajouter les nouvelles cartes
-
+            container.innerHTML = '';
             if (result.status === "success" && result.data.length > 0) {
                 result.data.forEach(clan => {
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
                     card.innerHTML = `
-                        <!-- Image et Date -->
-                        <div class="clanImage">
+                        <div class="clanDate">
                             <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
-                            <div class="clanDate">
-                                🕒 ${formatTimeAgo(new Date(clan.publication_date))}
-                            </div>
+                            <span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}
                         </div>
-                        
-                        <!-- Contenu principal -->
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                             <p class="clanDescription">${clan.description}</p>
                         </div>
-
-                        <!-- Badges -->
                         <div class="clanBadges">
                             <span class="badge">Actif</span>
                             <span class="badge">Guerres</span>
