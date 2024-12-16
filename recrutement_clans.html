@@ -69,6 +69,7 @@
         <div class="clanGridContainer">
             {% for clan in clans %}
             <div class="clanCard">
+
                 <div class="clanImage">
                     <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
                     <div class="clanDate">🕒 {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}</div>
@@ -78,6 +79,7 @@
                     <h2 class="clanTitle">{{ clan.clan_id }}</h2>
                     <p class="clanDescription">{{ clan.description }}</p>
                 </div>
+
 
                 <div class="clanBadges">
                     <span class="badge">Actif</span>
