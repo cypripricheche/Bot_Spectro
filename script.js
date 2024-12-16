@@ -55,6 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 result.data.forEach(clan => {
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
+
+                    // Construction de la carte
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
@@ -62,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
-                            <p class="clanDescription">${formatMarkdown(clan.description)}</p>
                         </div>
                         <div class="clanBadges">
                             <span class="badge">Actif</span>
@@ -70,6 +71,15 @@ document.addEventListener("DOMContentLoaded", () => {
                             <span class="badge">Sérieux</span>
                         </div>
                     `;
+
+                    // Gestion de la description avec format Markdown
+                    const description = document.createElement('p');
+                    description.classList.add('clanDescription');
+                    description.innerHTML = formatMarkdown(clan.description);
+
+                    // Ajout de la description au bon endroit
+                    card.querySelector('.clanContent').appendChild(description);
+
                     container.appendChild(card);
                 });
             } else {
