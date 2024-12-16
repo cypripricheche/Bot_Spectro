@@ -747,31 +747,35 @@ header {
     width: 100%;
     height: 111px; 
     overflow: hidden;
-    background-color: #444;
+    background-color: #444; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .clanImage img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 /* Date avec icône */
 .clanDate {
     position: absolute;
     top: 5px;
-    right: 5px; 
+    right: 5px;
     background: #c778ff;
-    color: white; 
+    color: white;
     padding: 5px 8px;
     border-radius: 12px;
     font-size: 12px;
     display: flex;
     align-items: center;
     gap: 3px;
+    z-index: 2;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    z-index: 2; 
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 
