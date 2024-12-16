@@ -69,16 +69,19 @@
         <div class="clanGridContainer">
             {% for clan in clans %}
             <div class="clanCard">
-
+                
                 <div class="clanImage">
                     <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
+                </div>
+
+                <div class="clanDate">
+                    <i class="fas fa-clock"></i> {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}
                 </div>
 
                 <div class="clanContent">
                     <h2 class="clanTitle">{{ clan.clan_id }}</h2>
                     <p class="clanDescription">{{ clan.description }}</p>
                 </div>
-
 
                 <div class="clanBadges">
                     <span class="badge">Actif</span>
