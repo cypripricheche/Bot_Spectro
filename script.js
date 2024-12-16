@@ -47,7 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
                     card.innerHTML = `
-                        <div class="clanDate">${new Date(clan.publication_date).toLocaleString()}</div>
+                        <div class="clanDate">
+                            <span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}
+                        </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">#${clan.clan_id}</h2>
                             <p class="clanDescription">${clan.description}</p>
@@ -71,3 +73,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchClans();
 });
+
+// Fonction pour formater la date en temps écoulé
+function formatTimeAgo(date) {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+
+    if (diffInSeconds < 60) {
+        return `${diffInSeconds}m`;
+    } else if (diffInSeconds < 3600) {
+        const minutes = Math.floor(diffInSeconds / 60);
+        return `${minutes}m`;
+    } else if (diffInSeconds < 86400) {
+        const hours = Math.floor(diffInSeconds / 3600);
+        return `${hours}h`;
+    } else {
+        const days = Math.floor(diffInSeconds / 86400);
+        return `${days}j`;
+    }
+}
