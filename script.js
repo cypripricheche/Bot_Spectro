@@ -35,6 +35,15 @@ document.querySelectorAll('.tab-button').forEach(button => {
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
 
+    // Fonction pour convertir les balises Markdown en HTML
+    function formatMarkdown(text) {
+        return text
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Gras: **texte**
+            .replace(/\*(.*?)\*/g, "<em>$1</em>")           // Italique: *texte*
+            .replace(/__(.*?)__/g, "<u>$1</u>")            // Souligné: __texte__
+            .replace(/~~(.*?)~~/g, "<del>$1</del>");       // Barré: ~~texte~~
+    }
+
     async function fetchClans() {
         try {
             const response = await fetch('/api/clans');
@@ -53,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
-                            <p class="clanDescription">${clan.description}</p>
+                            <p class="clanDescription">${formatMarkdown(clan.description)}</p>
                         </div>
                         <div class="clanBadges">
                             <span class="badge">Actif</span>
@@ -74,7 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchClans();
 });
-
 
 // Fonction pour formater la date en temps écoulé
 function formatTimeAgo(date) {
