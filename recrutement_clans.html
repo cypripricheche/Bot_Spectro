@@ -72,13 +72,8 @@
 
                 <div class="clanImage">
                     <img src="Images_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
+                    <div class="clanDate">🕒 {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}</div>
                 </div>
-
-
-                <div class="clanDate">
-                    🕒 {{ clan.publication_date.strftime('%d-%m-%Y %H:%M') }}
-                </div>
-
 
                 <div class="clanContent">
                     <h2 class="clanTitle">{{ clan.clan_id }}</h2>
@@ -96,11 +91,6 @@
         </div>
     </div>
     
-
-
-    
-    
-
     <!-- ============================================================================================================================
      * FOOTER SECTION
      * ============================================================================================================================
