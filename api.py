@@ -84,6 +84,11 @@ def static_files(filename):
         print(f"Erreur lors de l'accès au fichier : {filename}, {str(e)}")
         abort(404)  # Retourne une erreur 404 si le fichier est introuvable
 
+@app.route('/Image_Recrutement_Clans/<path:filename>')
+def serve_recrutement_images(filename):
+    """Servir les images du dossier Image_Recrutement_Clans."""
+    return send_from_directory('Image_Recrutement_Clans', filename)
+
 
 # ===== ROUTE API =====
 @app.route('/api/clans')
