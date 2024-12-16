@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="clanImage">
                             <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
                             <div class="clanDate">
-                                <span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}
+                                🕒 ${formatTimeAgo(new Date(clan.publication_date))}
                             </div>
                         </div>
                         <div class="clanContent">
