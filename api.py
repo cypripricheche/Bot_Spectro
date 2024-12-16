@@ -1,6 +1,7 @@
 from flask import Flask, send_file, send_from_directory, render_template_string, jsonify
 import mysql.connector
 from mysql.connector import Error
+from flask import abort
 
 app = Flask(__name__, static_folder=".", template_folder=".")
 
@@ -77,7 +78,12 @@ def script():
 @app.route('/<path:filename>')
 def static_files(filename):
     """Servir les images statiques et autres fichiers."""
-    return send_from_directory('.', filename)
+    try:
+        return send_from_directory('.', filename)
+    except Exception as e:
+        print(f"Erreur lors de l'accès au fichier : {filename}, {str(e)}")
+        abort(404)  # Retourne une erreur 404 si le fichier est introuvable
+
 
 # ===== ROUTE API =====
 @app.route('/api/clans')
