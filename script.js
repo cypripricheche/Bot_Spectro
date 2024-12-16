@@ -49,9 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
-                            <div class="clanDate">
-                                🕒 ${formatTimeAgo(new Date(clan.publication_date))}
-                            </div>
+                            <div class="clanDate"><span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}</div>
                         </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
@@ -76,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchClans();
 });
+
 
 // Fonction pour formater la date en temps écoulé
 function formatTimeAgo(date) {
