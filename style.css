@@ -745,7 +745,7 @@ header {
 .clanImage {
     position: relative;
     width: 100%;
-    height: 110px;
+    height: 112px;
     overflow: hidden;
     background-color: #444;
 }
@@ -753,7 +753,9 @@ header {
 .clanImage img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    display: block;
+    background-color: black;
 }
 
 /* Date avec icône */
@@ -769,6 +771,7 @@ header {
     display: flex;
     align-items: center;
     gap: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Légère ombre pour la date */
 }
 
 .clanDate i {
