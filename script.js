@@ -47,9 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
                     card.innerHTML = `
-                        <div class="clanDate">
+                        <div class="clanImage">
                             <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
-                            <span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}
+                            <div class="clanDate">
+                                <span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}
+                            </div>
                         </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
