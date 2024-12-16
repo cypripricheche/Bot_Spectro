@@ -761,6 +761,7 @@ header {
 .clanDescription {
     font-size: 14px;
     color: #cccccc;
+    white-space: pre-wrap; /* Conserve les sauts de ligne et les espaces */
 }
 
 .clanBadges {
