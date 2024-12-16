@@ -727,39 +727,32 @@ header {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    width: 400px;
+    width: 400px; /* Taille fixe */
     height: 320px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
 }
 
-.clanCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-}
-
-/* Image en haut */
 .clanImage {
     position: relative;
     width: 100%;
-    height: 35%; /* Proportion de la hauteur totale */
-    background-color: #444;
+    height: 111px; /* Hauteur fixe */
     overflow: hidden;
+    background-color: #444;
 }
 
 .clanImage img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* L'image couvre entièrement la section */
+    object-fit: cover; /* L'image occupe tout l'espace sans déformation */
     display: block;
 }
 
-/* Date avec icône */
+/* Date avec icône - isolé */
 .clanDate {
     position: absolute;
-    top: 10px;
+    top: 10px; /* Position fixe */
     right: 10px;
     background: #c778ff;
     color: white;
@@ -769,10 +762,11 @@ header {
     display: flex;
     align-items: center;
     gap: 3px;
+    z-index: 2; /* Assure que le texte est au-dessus */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap;
-    z-index: 2;
+    white-space: nowrap; /* Le texte ne dépasse pas */
 }
+
 
 .clanContent {
     padding: 15px;
