@@ -49,13 +49,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch('/api/clans');
             const result = await response.json();
             console.log(result); // Debugging
-
+    
             container.innerHTML = '';
             if (result.status === "success" && result.data.length > 0) {
-                result.data.forEach(clan => {
+                // Trier les données par ordre décroissant (du plus récent au plus ancien)
+                const sortedClans = result.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date));
+    
+                sortedClans.forEach(clan => {
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
-
+    
                     // Construction de la carte
                     card.innerHTML = `
                         <div class="clanImage">
@@ -71,15 +74,15 @@ document.addEventListener("DOMContentLoaded", () => {
                             <span class="badge">Sérieux</span>
                         </div>
                     `;
-
+    
                     // Gestion de la description avec format Markdown
                     const description = document.createElement('p');
                     description.classList.add('clanDescription');
                     description.innerHTML = formatMarkdown(clan.description);
-
+    
                     // Ajout de la description au bon endroit
                     card.querySelector('.clanContent').appendChild(description);
-
+    
                     container.appendChild(card);
                 });
             } else {
@@ -89,8 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur :", error);
             container.innerHTML = '<p style="color: red;">Impossible de charger les clans.</p>';
         }
-    }
-
+    }    
     fetchClans();
 });
 
@@ -112,3 +114,6 @@ function formatTimeAgo(date) {
         return `${days} J`;
     }
 }
+
+
+// Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
