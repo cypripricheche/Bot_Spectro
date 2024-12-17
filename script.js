@@ -75,6 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="icon">🕒</span> ${formatTimeAgo(publicationDate)}
                             </div>
                         </div>
+
+                        <!-- Ajout de l'image du blason en cercle -->
+                        <div class="clanAvatar">
+                            <img src="Image/Blasons/${clan.clan_id}.png" alt="Clan Blason">
+                        </div>
+                        
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                         </div>
@@ -124,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }    
 });
+
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
