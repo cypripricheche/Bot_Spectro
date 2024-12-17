@@ -69,9 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                         </div>
                         <div class="clanBadges">
-                            <span class="badge">Actif</span>
-                            <span class="badge">Guerres</span>
-                            <span class="badge">Sérieux</span>
+                            <span class="badge">Rejoindre Discord</span>
+                            <span class="badge">Rejoindre Clan</span>
                         </div>
                     `;
     
