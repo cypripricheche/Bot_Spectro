@@ -109,11 +109,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchClans();
 
-    // Convertir UTC en heure de Paris
+    // Convertir UTC en heure de Paris avec Intl.DateTimeFormat
     function convertToParisTime(dateString) {
-        return new Date(
-            new Date(dateString).toLocaleString("en-US", { timeZone: "Europe/Paris" })
-        );
+        const date = new Date(dateString);
+        const options = { timeZone: 'Europe/Paris', hour12: false };
+        const parisTime = new Intl.DateTimeFormat('en-US', {
+            ...options,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        }).format(date);
+
+        return new Date(parisTime);
     }
 
     // Formater le temps écoulé
@@ -135,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
 
 
 
