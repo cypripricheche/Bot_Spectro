@@ -53,13 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Calculer le temps écoulé
     function formatTimeAgo(date) {
-        const now = new Date();
-        const diffInSeconds = Math.floor((now - date) / 1000);
-
-        if (isNaN(diffInSeconds) || diffInSeconds < 0) {
+        const now = new Date(); // Date actuelle en local
+        const targetDate = new Date(date); // Date à comparer en UTC
+    
+        if (isNaN(targetDate.getTime())) {
             return "Date invalide";
         }
-
+    
+        const diffInSeconds = Math.floor((now.getTime() - targetDate.getTime()) / 1000);
+    
+        if (diffInSeconds < 0) return "À l'instant"; // Pour les dates futures
         if (diffInSeconds < 60) return `${diffInSeconds}m`;
         if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} M`;
         if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} H`;
