@@ -121,7 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function formatTimeAgo(date) {
     const now = new Date();
-    const diffInSeconds = Math.floor((now - date) / 1000);
+    
+    // Convertir la date en heure de Paris
+    const options = { timeZone: 'Europe/Paris' };
+    const publicationDate = new Date(
+        new Intl.DateTimeFormat('en-US', options).format(date)
+    );
+
+    const diffInSeconds = Math.floor((now - publicationDate) / 1000);
 
     if (diffInSeconds < 60) {
         return `${diffInSeconds}m`;
