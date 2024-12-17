@@ -833,8 +833,14 @@ header {
     border-radius: 12px;
     font-size: 12px;
     text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
 }
 
+.badge:hover {
+    background-color: #a95ce5;
+    text-decoration: none;
+}
 
 
 /* ============================================================================================================================ *
