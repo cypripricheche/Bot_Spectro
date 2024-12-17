@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     card.innerHTML = `
                         <div class="clanImage">
-                            <img src="<img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
+                            <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
                             <div class="clanDate">
                                 <span class="icon">🕒</span> ${formatTimeAgo(publicationDate)}
                             </div>
