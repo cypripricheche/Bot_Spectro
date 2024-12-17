@@ -728,7 +728,7 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     width: 380px; /* Taille fixe */
-    height: 350px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -809,6 +809,7 @@ header {
     text-align: justify;
 }
 
+
 /* Ajustement de la barre de défilement pour Webkit (Chrome, Safari, Edge) */
 .clanDescription::-webkit-scrollbar {
     width: 6px; /* Réduit la largeur de la barre de défilement */
@@ -851,6 +852,33 @@ header {
 .badge:hover {
     background-color: #a95ce5;
     text-decoration: none;
+}
+
+/* Image circulaire (Avatar) */
+.clanAvatar {
+    position: absolute;
+    top: 70px;
+    left: 15%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 3;
+    background-color: #444;
+}
+
+.clanAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+/* Décale le titre un peu plus bas */
+.clanContent {
+    padding-top: 25px;
 }
 
 
