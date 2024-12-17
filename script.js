@@ -44,6 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/~~(.*?)~~/g, "<del>$1</del>");       // Barré: ~~texte~~
     }
 
+    // Fonction pour extraire un lien Discord d'une chaîne de texte
+    function extractDiscordLink(text) {
+        const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
+        const matches = text.match(discordRegex);
+        return matches ? matches[0] : null; // Prend le premier lien trouvé, sinon null
+    }
+
     async function fetchClans() {
         try {
             const response = await fetch('/api/clans');
@@ -56,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const sortedClans = result.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date));
     
                 sortedClans.forEach(clan => {
+                    const discordLink = extractDiscordLink(clan.description); // Extrait le lien Discord
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
     
@@ -69,11 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                         </div>
                         <div class="clanBadges">
-                            <span class="badge">Rejoindre Discord</span>
-                            <span class="badge">Rejoindre Clan</span>
+                            <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>
+                            ${discordLink ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>` : ''}
                         </div>
                     `;
-    
+
                     // Gestion de la description avec format Markdown
                     const description = document.createElement('p');
                     description.classList.add('clanDescription');
@@ -81,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
                     // Ajout de la description au bon endroit
                     card.querySelector('.clanContent').appendChild(description);
-    
+
                     container.appendChild(card);
                 });
             } else {
@@ -113,6 +121,7 @@ function formatTimeAgo(date) {
         return `${days} J`;
     }
 }
+
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
