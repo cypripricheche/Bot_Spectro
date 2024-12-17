@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         <!-- Ajout de l'image du blason en cercle -->
                         <div class="clanAvatar">
-                            <img src="Image/Blasons/${clan.clan_id}.png" alt="Clan Blason">
+                            <img src="${clan.badgeUrls.medium}" alt="Clan Blason">
                         </div>
                         
                         <div class="clanContent">
