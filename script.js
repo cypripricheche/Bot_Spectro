@@ -108,13 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fonction pour formater le temps écoulé
     function formatTimeAgo(date) {
-        // Convertir UTC en heure de Paris avec ajout de 1 heure si besoin
-        date.setHours(date.getHours() + 1);
-
         const now = new Date();
-        const diffInMinutes = Math.floor((now - date) / (1000 * 60));
-
-        if (diffInMinutes < 60) {
+        const diffInMinutes = Math.floor((now - date) / (1000 * 60)) + 60; // Ajout de 1 heure (60 minutes)
+    
+        if (diffInMinutes <= 0) {
+            return "À l'instant";
+        } else if (diffInMinutes < 60) {
             return `${diffInMinutes} M`;
         } else if (diffInMinutes < 1440) {
             const hours = Math.floor(diffInMinutes / 60);
@@ -123,9 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const days = Math.floor(diffInMinutes / 1440);
             return `${days} J`;
         }
-    }
+    }    
 });
-
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
