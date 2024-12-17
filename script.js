@@ -35,6 +35,7 @@ document.querySelectorAll('.tab-button').forEach(button => {
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
 
+    // Convertir Markdown en HTML
     function formatMarkdown(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Gras: **texte**
@@ -43,12 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/~~(.*?)~~/g, "<del>$1</del>");       // Barré: ~~texte~~
     }
 
+    // Extraire un lien Discord
     function extractDiscordLink(text) {
         const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
         const matches = text.match(discordRegex);
         return matches ? matches[0] : null;
     }
 
+    // Récupérer et afficher les clans
     async function fetchClans() {
         try {
             const response = await fetch('/api/clans');
@@ -63,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 sortedClans.forEach(clan => {
                     const discordLink = extractDiscordLink(clan.description);
-                    const publicationDateParis = convertToParisTime(new Date(clan.publication_date));
+                    const publicationDateParis = convertToParisTime(clan.publication_date);
 
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
@@ -105,31 +108,34 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetchClans();
+
+    // Convertir UTC en heure de Paris
+    function convertToParisTime(dateString) {
+        return new Date(
+            new Date(dateString).toLocaleString("en-US", { timeZone: "Europe/Paris" })
+        );
+    }
+
+    // Formater le temps écoulé
+    function formatTimeAgo(date) {
+        const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+        const diffInSeconds = Math.floor((now - date) / 1000);
+
+        if (diffInSeconds < 60) {
+            return `${diffInSeconds} S`;
+        } else if (diffInSeconds < 3600) {
+            const minutes = Math.floor(diffInSeconds / 60);
+            return `${minutes} M`;
+        } else if (diffInSeconds < 86400) {
+            const hours = Math.floor(diffInSeconds / 3600);
+            return `${hours} H`;
+        } else {
+            const days = Math.floor(diffInSeconds / 86400);
+            return `${days} J`;
+        }
+    }
 });
 
-// Fonction pour convertir la date en heure de Paris
-function convertToParisTime(date) {
-    return new Date(date.toLocaleString("en-US", { timeZone: "Europe/Paris" }));
-}
-
-// Fonction pour afficher la différence de temps en heure française
-function formatTimeAgo(publicationDate) {
-    const now = convertToParisTime(new Date());
-    const diffInSeconds = Math.floor((now - publicationDate) / 1000);
-
-    if (diffInSeconds < 60) {
-        return `${diffInSeconds} S`;
-    } else if (diffInSeconds < 3600) {
-        const minutes = Math.floor(diffInSeconds / 60);
-        return `${minutes} M`;
-    } else if (diffInSeconds < 86400) {
-        const hours = Math.floor(diffInSeconds / 3600);
-        return `${hours} H`;
-    } else {
-        const days = Math.floor(diffInSeconds / 86400);
-        return `${days} J`;
-    }
-}
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
