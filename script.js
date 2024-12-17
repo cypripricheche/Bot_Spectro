@@ -35,7 +35,7 @@ document.querySelectorAll('.tab-button').forEach(button => {
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
 
-    
+    // Fonction pour convertir les balises Markdown en HTML
     function formatMarkdown(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Gras: **texte**
@@ -44,29 +44,47 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/~~(.*?)~~/g, "<del>$1</del>");       // Barré: ~~texte~~
     }
 
-    
+    // Extraire le lien Discord d'une description
     function extractDiscordLink(text) {
         const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
         const matches = text.match(discordRegex);
-        return matches ? matches[0] : null; 
+        return matches ? matches[0] : null;
     }
 
+    // Calculer le temps écoulé
+    function formatTimeAgo(date) {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - date) / 1000);
+
+        if (isNaN(diffInSeconds) || diffInSeconds < 0) {
+            return "Date invalide";
+        }
+
+        if (diffInSeconds < 60) return `${diffInSeconds}m`;
+        if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} M`;
+        if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} H`;
+        return `${Math.floor(diffInSeconds / 86400)} J`;
+    }
+
+    // Fonction pour récupérer et afficher les clans
     async function fetchClans() {
         try {
             const response = await fetch('/api/clans');
             const result = await response.json();
-            console.log(result); 
-    
-            container.innerHTML = '';
-            if (result.status === "success" && result.data.length > 0) {
 
-                const sortedClans = result.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date));
-    
+            container.innerHTML = '';
+
+            if (result.status === "success" && result.data.length > 0) {
+                // Trier les clans par date décroissante
+                const sortedClans = result.data.sort(
+                    (a, b) => new Date(b.publication_date) - new Date(a.publication_date)
+                );
+
                 sortedClans.forEach(clan => {
                     const discordLink = extractDiscordLink(clan.description);
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
-                
+
                     // Construction de la carte
                     card.innerHTML = `
                         <div class="clanImage">
@@ -75,25 +93,14 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
+                            <p class="clanDescription">${formatMarkdown(clan.description)}</p>
                         </div>
                         <div class="clanBadges">
-                            ${
-                                discordLink 
-                                ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>
-                                   <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>`
-                                : `<a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>`
-                            }
+                            ${discordLink ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>` : ""}
+                            <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>
                         </div>
                     `;
-                
-                    // Gestion de la description avec format Markdown
-                    const description = document.createElement('p');
-                    description.classList.add('clanDescription');
-                    description.innerHTML = formatMarkdown(clan.description);
-                
-                    // Ajout de la description au bon endroit
-                    card.querySelector('.clanContent').appendChild(description);
-                
+
                     container.appendChild(card);
                 });
             } else {
@@ -103,22 +110,15 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur :", error);
             container.innerHTML = '<p style="color: red;">Impossible de charger les clans.</p>';
         }
-    }    
+    }
+
     fetchClans();
 });
 
-// Fonction pour formater la date en temps écoulé
-function isValidDate(d) {
-    return d instanceof Date && !isNaN(d);
-}
 
 function formatTimeAgo(date) {
-    if (!isValidDate(date)) return "Date invalide";
-
     const now = new Date();
-    let diffInSeconds = Math.floor((now - date) / 1000);
-
-    if (diffInSeconds < 0) diffInSeconds = 0;
+    const diffInSeconds = Math.floor((now - date) / 1000);
 
     if (diffInSeconds < 60) {
         return `${diffInSeconds}m`;
