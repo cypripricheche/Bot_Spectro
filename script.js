@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function extractDiscordLink(text) {
         const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
         const matches = text.match(discordRegex);
-        return matches ? matches[0] : null; 
+        return matches ? matches[0] : null;
     }
 
     async function fetchClans() {
@@ -57,15 +57,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             container.innerHTML = '';
             if (result.status === "success" && result.data.length > 0) {
-
-                // Trier par ordre décroissant des dates
-                const sortedClans = result.data.sort((a, b) => 
-                    new Date(b.publication_date).getTime() - new Date(a.publication_date).getTime()
+                const sortedClans = result.data.sort((a, b) =>
+                    new Date(b.publication_date) - new Date(a.publication_date)
                 );
 
                 sortedClans.forEach(clan => {
                     const discordLink = extractDiscordLink(clan.description);
-                    const publicationDateParis = new Date(new Date(clan.publication_date).toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+                    const publicationDateParis = convertToParisTime(new Date(clan.publication_date));
 
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
@@ -82,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                         <div class="clanBadges">
                             ${
-                                discordLink 
+                                discordLink
                                 ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>
                                    <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>`
                                 : `<a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>`
@@ -109,9 +107,15 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchClans();
 });
 
-function formatTimeAgo(date) {
-    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Paris" }));
-    const diffInSeconds = Math.floor((now - date) / 1000);
+// Fonction pour convertir la date en heure de Paris
+function convertToParisTime(date) {
+    return new Date(date.toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+}
+
+// Fonction pour afficher la différence de temps en heure française
+function formatTimeAgo(publicationDate) {
+    const now = convertToParisTime(new Date());
+    const diffInSeconds = Math.floor((now - publicationDate) / 1000);
 
     if (diffInSeconds < 60) {
         return `${diffInSeconds} S`;
