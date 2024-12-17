@@ -108,9 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Fonction pour formater la date en temps écoulé
+function isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+}
+
 function formatTimeAgo(date) {
+    if (!isValidDate(date)) return "Date invalide";
+
     const now = new Date();
-    const diffInSeconds = Math.floor((now - date) / 1000);
+    let diffInSeconds = Math.floor((now - date) / 1000);
+
+    if (diffInSeconds < 0) diffInSeconds = 0;
 
     if (diffInSeconds < 60) {
         return `${diffInSeconds}m`;
