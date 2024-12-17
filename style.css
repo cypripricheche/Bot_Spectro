@@ -715,7 +715,7 @@ header {
 
 .clanGridContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 400px); /* Taille fixe */
+    grid-template-columns: repeat(auto-fit, 380px); /* Taille fixe */
     gap: 40px; /* Espacement entre les cartes */
     justify-content: center; /* Centre les cartes horizontalement */
     margin: 0 auto; /* Centre globalement */
