@@ -35,7 +35,6 @@ document.querySelectorAll('.tab-button').forEach(button => {
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
 
-    
     function formatMarkdown(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Gras: **texte**
@@ -44,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/~~(.*?)~~/g, "<del>$1</del>");       // Barré: ~~texte~~
     }
 
-    
     function extractDiscordLink(text) {
         const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
         const matches = text.match(discordRegex);
@@ -55,23 +53,29 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch('/api/clans');
             const result = await response.json();
-            console.log(result); 
-    
+            console.log(result);
+
             container.innerHTML = '';
             if (result.status === "success" && result.data.length > 0) {
 
-                const sortedClans = result.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date));
-    
+                // Trier par ordre décroissant des dates
+                const sortedClans = result.data.sort((a, b) => 
+                    new Date(b.publication_date).getTime() - new Date(a.publication_date).getTime()
+                );
+
                 sortedClans.forEach(clan => {
                     const discordLink = extractDiscordLink(clan.description);
+                    const publicationDateParis = new Date(new Date(clan.publication_date).toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
-                
-                    // Construction de la carte
+
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image_Recrutement_Clans/AccueilClans.png" alt="Clan Image">
-                            <div class="clanDate"><span class="icon">🕒</span> ${formatTimeAgo(new Date(clan.publication_date))}</div>
+                            <div class="clanDate">
+                                <span class="icon">🕒</span> ${formatTimeAgo(publicationDateParis)}
+                            </div>
                         </div>
                         <div class="clanContent">
                             <h2 class="clanTitle">${clan.clan_id}</h2>
@@ -85,15 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                         </div>
                     `;
-                
-                    // Gestion de la description avec format Markdown
+
                     const description = document.createElement('p');
                     description.classList.add('clanDescription');
                     description.innerHTML = formatMarkdown(clan.description);
-                
-                    // Ajout de la description au bon endroit
+
                     card.querySelector('.clanContent').appendChild(description);
-                
                     container.appendChild(card);
                 });
             } else {
@@ -103,21 +104,14 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur :", error);
             container.innerHTML = '<p style="color: red;">Impossible de charger les clans.</p>';
         }
-    }    
+    }
+
     fetchClans();
 });
 
-
 function formatTimeAgo(date) {
-    const now = new Date();
-    
-    // Convertir la date en heure de Paris
-    const options = { timeZone: 'Europe/Paris' };
-    const publicationDate = new Date(
-        new Intl.DateTimeFormat('en-US', options).format(date)
-    );
-
-    const diffInSeconds = Math.floor((now - publicationDate) / 1000);
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Paris" }));
+    const diffInSeconds = Math.floor((now - date) / 1000);
 
     if (diffInSeconds < 60) {
         return `${diffInSeconds} S`;
@@ -132,7 +126,6 @@ function formatTimeAgo(date) {
         return `${days} J`;
     }
 }
-
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
