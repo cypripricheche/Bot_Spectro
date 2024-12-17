@@ -131,7 +131,7 @@ function formatTimeAgo(date) {
     const diffInSeconds = Math.floor((now - publicationDate) / 1000);
 
     if (diffInSeconds < 60) {
-        return `${diffInSeconds}m`;
+        return `${diffInSeconds} S`;
     } else if (diffInSeconds < 3600) {
         const minutes = Math.floor(diffInSeconds / 60);
         return `${minutes} M`;
