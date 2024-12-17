@@ -35,7 +35,7 @@ document.querySelectorAll('.tab-button').forEach(button => {
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
 
-    // Fonction pour convertir les balises Markdown en HTML
+    
     function formatMarkdown(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Gras: **texte**
@@ -44,29 +44,29 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/~~(.*?)~~/g, "<del>$1</del>");       // Barré: ~~texte~~
     }
 
-    // Fonction pour extraire un lien Discord d'une chaîne de texte
+    
     function extractDiscordLink(text) {
         const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
         const matches = text.match(discordRegex);
-        return matches ? matches[0] : null; // Prend le premier lien trouvé, sinon null
+        return matches ? matches[0] : null; 
     }
 
     async function fetchClans() {
         try {
             const response = await fetch('/api/clans');
             const result = await response.json();
-            console.log(result); // Debugging
+            console.log(result); 
     
             container.innerHTML = '';
             if (result.status === "success" && result.data.length > 0) {
-                // Trier les données par ordre décroissant (du plus récent au plus ancien)
+
                 const sortedClans = result.data.sort((a, b) => new Date(b.publication_date) - new Date(a.publication_date));
     
                 sortedClans.forEach(clan => {
-                    const discordLink = extractDiscordLink(clan.description); // Extrait le lien Discord
+                    const discordLink = extractDiscordLink(clan.description);
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
-    
+                
                     // Construction de la carte
                     card.innerHTML = `
                         <div class="clanImage">
@@ -77,19 +77,23 @@ document.addEventListener("DOMContentLoaded", () => {
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                         </div>
                         <div class="clanBadges">
-                            ${discordLink ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>` : ''}
-                            <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>
+                            ${
+                                discordLink 
+                                ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>
+                                   <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>`
+                                : `<a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>`
+                            }
                         </div>
                     `;
-
+                
                     // Gestion de la description avec format Markdown
                     const description = document.createElement('p');
                     description.classList.add('clanDescription');
                     description.innerHTML = formatMarkdown(clan.description);
-    
+                
                     // Ajout de la description au bon endroit
                     card.querySelector('.clanContent').appendChild(description);
-
+                
                     container.appendChild(card);
                 });
             } else {
