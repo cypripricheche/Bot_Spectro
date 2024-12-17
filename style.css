@@ -873,7 +873,7 @@ header {
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(0.8); 
+    transform: scale(0.9) translateY(5%); 
 }
 
 
