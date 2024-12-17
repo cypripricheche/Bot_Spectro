@@ -795,15 +795,18 @@ header {
 }
 
 /* Description défilante */
+/* Description défilante */
 .clanDescription {
     font-size: 14px;
     color: #cccccc;
-    white-space: pre-wrap;
+    white-space: pre-wrap; /* Garde les sauts de ligne */
     line-height: 1.4;
     flex: 1;
     overflow-y: auto; /* Défilement vertical uniquement */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
     margin: 0;
     padding: 10px;
+    word-wrap: break-word; /* Coupe les mots longs pour éviter le dépassement */
 }
 
 /* Ajustement de la barre de défilement pour Webkit (Chrome, Safari, Edge) */
