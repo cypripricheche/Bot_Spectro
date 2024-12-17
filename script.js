@@ -77,8 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                         </div>
                         <div class="clanBadges">
-                            <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>
                             ${discordLink ? `<a href="${discordLink}" target="_blank" class="badge">Rejoindre Discord</a>` : ''}
+                            <a href="https://link.clashofclans.com/en?action=OpenClanProfile&tag=${encodeURIComponent(clan.clan_tag)}" target="_blank" class="badge">Rejoindre Clan</a>
                         </div>
                     `;
 
