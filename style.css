@@ -916,7 +916,8 @@ header {
 
 /* Badge Serveur à l'intérieur du conteneur */
 .badgeServeur,
-.badgeNouveau {
+.badgeNouveau,
+.badgeFamilleDeClan {
     width: 20px;
     height: 20px;
     object-fit: contain;
