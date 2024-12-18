@@ -78,9 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const badgeHTML = `
                     <div class="badgeServeurContainer" data-tooltip="Nouveau Clan">
                         ${hasBadgeNouveau ? `<img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">` : ''}
+                         <span class="badgeTooltip">Nouveau Clan</span>
                     </div>
                     <div class="badgeServeurContainer" data-tooltip="Serveur">
                         ${hasBadgeServeur ? `<img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">` : ''}
+                         <span class="badgeTooltip">Serveur</span>
                     </div>
                     `;
                 
