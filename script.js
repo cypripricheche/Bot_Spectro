@@ -69,12 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     card.classList.add('clanCard');
 
                     card.innerHTML = `
-                        <div class="clashofclan-tabs">
-                            <button class="tab-recrutement active" data-target="new_clan">Nouveau Clan</button>
-                            <button class="tab-recrutement active" data-target="family_clan">Famille de Clan</button>
-                        </div>
-                        <p style="color: red; text-align: center;">Cliquez pour activer/désactiver les options<br><br></p>
-
                         <div class="clanImage">
                             <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
                             <div class="clanDate">
