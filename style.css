@@ -898,62 +898,58 @@ header {
 
 /* Conteneur pour les badges Serveur */
 .badgeServeurContainer {
-    position: absolute;
-    top: 10px; 
-    right: 10px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 8px; 
+    position: relative;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
     background-color: rgba(73, 73, 73, 0.7);
-    border: 1px solid #5c5c5c; 
-    border-radius: 8px; 
-    padding: 5px 8px; 
+    border: 1px solid #5c5c5c;
+    border-radius: 5px;
+    padding: 3px 5px;
+    min-height: 26px;
     z-index: 4;
-    min-width: 60px; 
-    min-height: 30px; 
+    cursor: pointer;
 }
 
 /* Badge Serveur et Nouveau */
 .badgeServeur,
 .badgeNouveau {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
-    display: inline-block;
-    transition: transform 0.3s ease; 
+    display: block;
 }
 
-/* Effet au survol des badges */
-.badgeServeur:hover,
-.badgeNouveau:hover {
-    transform: scale(1.1); 
-    cursor: pointer;
-}
-
-/* Tooltip pour les badges */
-.badgeServeurContainer::after {
-    content: attr(data-tooltip); 
+/* Tooltips pour chaque badge */
+.badgeServeurContainer[data-tooltip]::after {
+    content: attr(data-tooltip);
     position: absolute;
-    bottom: -35px; 
+    bottom: 120%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
-    font-size: 12px;
-    padding: 5px 8px;
+    padding: 5px 10px;
     border-radius: 5px;
-    white-space: nowrap; 
+    font-size: 12px;
+    white-space: nowrap;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.3s ease, opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
 }
 
-/* Affichage du tooltip au survol */
+/* Affichage des tooltips uniquement si le badge est présent */
 .badgeServeurContainer:hover::after,
 .badgeServeurContainer:active::after {
     visibility: visible;
     opacity: 1;
+}
+
+/* Suppression des tooltips si le badge n'est pas affiché */
+.badgeServeurContainer:empty::after {
+    display: none;
 }
 
 
