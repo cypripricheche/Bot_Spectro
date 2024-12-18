@@ -899,39 +899,41 @@ header {
 /* Conteneur pour les badges */
 .badgeServeurContainer {
     position: absolute;
-    top: 110px; /* Ajustement de la position */
-    right: 5px; /* Aligné à droite */
-    display: flex; /* Affiche les badges en ligne */
-    gap: 5px; /* Espacement entre les badges */
-    align-items: center; /* Centre verticalement */
-    background-color: rgba(73, 73, 73, 0.7); /* Fond gris semi-transparent */
-    border: 1px solid #5c5c5c; /* Contour gris clair */
-    border-radius: 5px; /* Coins légèrement arrondis */
-    padding: 3px 5px; /* Padding interne */
+    top: 110px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: rgba(73, 73, 73, 0.7);
+    border: 1px solid #5c5c5c;
+    border-radius: 5px;
+    padding: 3px 5px;
+    min-height: 26px;
     z-index: 4;
+    cursor: pointer;
 }
 
-/* Styles pour chaque badge */
+/* Badge Serveur et Nouveau Clan */
 .badgeServeur,
 .badgeNouveau {
-    position: relative; /* Pour positionner les tooltips individuellement */
     width: 20px;
     height: 20px;
     object-fit: contain;
     display: block;
-    cursor: pointer; /* Indique qu'un élément interactif est présent */
+    position: relative;
 }
 
-/* Tooltip individuel pour le badge Nouveau Clan */
+/* Tooltip pour chaque badge */
+.badgeServeur::after,
 .badgeNouveau::after {
-    content: "Nouveau Clan";
+    content: attr(data-tooltip); /* Affiche le texte du tooltip */
     position: absolute;
-    bottom: 120%;
+    top: -30px; /* Positionne au-dessus du badge */
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
-    padding: 5px 10px;
+    padding: 5px 8px;
     border-radius: 5px;
     font-size: 12px;
     white-space: nowrap;
@@ -939,37 +941,22 @@ header {
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     pointer-events: none;
-    z-index: 5;
+    z-index: 10;
 }
 
-/* Tooltip individuel pour le badge Serveur */
-.badgeServeur::after {
-    content: "Serveur";
-    position: absolute;
-    bottom: 120%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-    white-space: nowrap;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    pointer-events: none;
-    z-index: 5;
-}
-
-/* Affichage des tooltips au survol des badges */
-.badgeNouveau:hover::after,
-.badgeNouveau:active::after,
-.badgeServeur:hover::after,
-.badgeServeur:active::after {
+/* Affiche le tooltip uniquement au survol */
+.badgeServeur:hover::after {
     visibility: visible;
     opacity: 1;
+    content: "Serveur";
 }
+
+.badgeNouveau:hover::after {
+    visibility: visible;
+    opacity: 1;
+    content: "Nouveau Clan";
+}
+
 
 .tab-recrutement {
     background-color: #262626;
