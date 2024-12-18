@@ -115,7 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="clanAvatar">
                             <img src="${clan.clan_url_blason}" alt="Clan Blason">
                         </div>
-                        ${hasBadgeNouveau || hasBadgeServeur || badgeFamilleDeClan ? badgeHTML : ''}
+                        ${hasBadgeNouveau || hasBadgeServeur || badgeFamilleDeClan ? `
+                            <div class="badgeServeurContainer">
+                                ${badgeHTML}
+                            </div>
+                        ` : ''}     
                         <div class="clanContent">
                             <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
