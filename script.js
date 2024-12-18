@@ -34,6 +34,7 @@ document.querySelectorAll('.tab-button').forEach(button => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
+    const buttons = document.querySelectorAll('.tab-recrutement');
 
     function formatMarkdown(text) {
         return text
@@ -139,12 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return `${days} J`;
         }
     }    
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll('.tab-recrutement');
-    const cards = document.querySelectorAll('.clanCard');
 
     // Fonction pour mettre à jour l'affichage des cartes en fonction des filtres
     function updateCardDisplay() {
@@ -176,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
