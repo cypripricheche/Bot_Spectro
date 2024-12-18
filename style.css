@@ -957,9 +957,18 @@ header {
     opacity: 1;
 }
 
-/* Cache le texte uniquement si l'image n'est pas présente */
-.badgeWrapper:not(:has(img)) .badgeTooltip {
-    display: none;
+/* Cache le conteneur si aucune image n'est présente */
+.badgeWrapper:empty,
+.badgeWrapper img:not([src]) {
+    display: none; /* Cache complètement le badgeWrapper */
+}
+
+/* Réduire l'espace si aucun badge n'est visible */
+.badgeServeurContainer:empty {
+    padding: 0;
+    background-color: transparent; /* Fond transparent si vide */
+    border: none; /* Retire la bordure si aucun contenu */
+    min-height: 0;
 }
 
 .tab-recrutement {
