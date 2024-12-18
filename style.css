@@ -957,6 +957,11 @@ header {
     opacity: 1;
 }
 
+/* Cache le texte uniquement si l'image n'est pas présente */
+.badgeWrapper:not(:has(img)) .badgeTooltip {
+    display: none;
+}
+
 .tab-recrutement {
     background-color: #262626;
     color: #ffffff;
