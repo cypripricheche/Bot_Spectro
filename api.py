@@ -35,7 +35,7 @@ def recrutement_clans():
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT clan_id, clan_name, description, publication_date, clan_url_blason FROM recrutement_clans")
+        cursor.execute("SELECT clan_id, clan_name, description, publication_date, clan_url_blason, serveur_id FROM recrutement_clans")
         clans = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -92,7 +92,7 @@ def get_clans():
     try:
         conn = get_db_connection()
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT clan_id, clan_name, description, publication_date, clan_url_blason FROM recrutement_clans")
+        cursor.execute("SELECT clan_id, clan_name, description, publication_date, clan_url_blason, serveur_id FROM recrutement_clans")
         clans = cursor.fetchall()
         cursor.close()
         conn.close()
