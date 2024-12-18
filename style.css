@@ -899,28 +899,55 @@ header {
 /* Conteneur pour les badges Serveur */
 .badgeServeurContainer {
     position: absolute;
-    top: 110px; /* Ajustement de la position */
-    right: 5px; /* Aligné à droite */
-    display: flex; /* Affiche les badges en ligne */
-    gap: 5px; /* Espacement entre les badges */
-    align-items: center; /* Centre verticalement */
-    background-color: rgba(73, 73, 73, 0.7); /* Fond gris semi-transparent */
-    border: 1px solid #5c5c5c; /* Contour gris clair */
-    border-radius: 5px; /* Coins légèrement arrondis */
-    padding: 3px 5px; /* Padding interne */
-    min-height: 26px; /* Hauteur minimale */
+    top: 110px;
+    right: 5px; 
+    display: flex;
+    gap: 5px; 
+    align-items: center;
+    background-color: rgba(73, 73, 73, 0.7);
+    border: 1px solid #5c5c5c;
+    border-radius: 5px;
+    padding: 3px 5px;
+    min-height: 26px;
     z-index: 4;
+    cursor: pointer;
 }
 
-/* Badge Serveur à l'intérieur du conteneur */
+/* Badge Serveur et Nouveau */
 .badgeServeur,
 .badgeNouveau {
     width: 20px;
     height: 20px;
-    object-fit: contain; /* Ajuste l'image sans déformation */
+    object-fit: contain;
     display: block;
 }
 
+/* Tooltips pour les badges */
+.badgeServeurContainer::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Affichage des tooltips au survol */
+.badgeServeurContainer:hover::after,
+.badgeServeurContainer:active::after {
+    visibility: visible;
+    opacity: 1;
+}
 
 .tab-recrutement {
     background-color: #262626;
