@@ -896,28 +896,31 @@ header {
     padding-top: 25px;
 }
 
-/* Conteneur pour le badge Serveur */
+/* Conteneur pour les badges Serveur */
 .badgeServeurContainer {
     position: absolute;
     top: 110px; /* Ajustement de la position */
     right: 5px; /* Aligné à droite */
-    width: 35px;
-    height: 26px;
+    display: flex; /* Affiche les badges en ligne */
+    gap: 5px; /* Espacement entre les badges */
+    align-items: center; /* Centre verticalement */
     background-color: rgba(73, 73, 73, 0.7); /* Fond gris semi-transparent */
     border: 1px solid #5c5c5c; /* Contour gris clair */
     border-radius: 5px; /* Coins légèrement arrondis */
-    display: flex;
-    justify-content: center; /* Centre le badge horizontalement */
-    align-items: center; /* Centre le badge verticalement */
+    padding: 3px 5px; /* Padding interne */
+    min-height: 26px; /* Hauteur minimale */
     z-index: 4;
 }
 
 /* Badge Serveur à l'intérieur du conteneur */
-.badgeServeur {
+.badgeServeur,
+.badgeNouveau {
     width: 20px;
     height: 20px;
-    object-fit: contain;
+    object-fit: contain; /* Ajuste l'image sans déformation */
+    display: block;
 }
+
 
 .tab-recrutement {
     background-color: #262626;
