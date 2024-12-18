@@ -899,55 +899,63 @@ header {
 /* Conteneur pour les badges Serveur */
 .badgeServeurContainer {
     position: absolute;
-    top: 110px;
-    right: 5px; 
-    display: flex;
-    gap: 5px; 
-    align-items: center;
+    top: 10px; 
+    right: 10px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    gap: 8px; 
     background-color: rgba(73, 73, 73, 0.7);
-    border: 1px solid #5c5c5c;
-    border-radius: 5px;
-    padding: 3px 5px;
-    min-height: 26px;
+    border: 1px solid #5c5c5c; 
+    border-radius: 8px; 
+    padding: 5px 8px; 
     z-index: 4;
-    cursor: pointer;
+    min-width: 60px; 
+    min-height: 30px; 
 }
 
 /* Badge Serveur et Nouveau */
 .badgeServeur,
 .badgeNouveau {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     object-fit: contain;
-    display: block;
+    display: inline-block;
+    transition: transform 0.3s ease; 
 }
 
-/* Tooltips pour les badges */
+/* Effet au survol des badges */
+.badgeServeur:hover,
+.badgeNouveau:hover {
+    transform: scale(1.1); 
+    cursor: pointer;
+}
+
+/* Tooltip pour les badges */
 .badgeServeurContainer::after {
-    content: attr(data-tooltip);
+    content: attr(data-tooltip); 
     position: absolute;
-    bottom: 120%;
+    bottom: -35px; 
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
     color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
     font-size: 12px;
-    white-space: nowrap;
+    padding: 5px 8px;
+    border-radius: 5px;
+    white-space: nowrap; 
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-    pointer-events: none;
-    z-index: 5;
+    transition: visibility 0.3s ease, opacity 0.3s ease;
 }
 
-/* Affichage des tooltips au survol */
+/* Affichage du tooltip au survol */
 .badgeServeurContainer:hover::after,
 .badgeServeurContainer:active::after {
     visibility: visible;
     opacity: 1;
 }
+
 
 .tab-recrutement {
     background-color: #262626;
