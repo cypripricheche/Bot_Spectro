@@ -69,6 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     card.classList.add('clanCard');
 
                     card.innerHTML = `
+                        <div class="clashofclan-tabs">
+                            <button class="tab-recrutement active" data-target="new_clan">Nouveau Clan</button>
+                            <button class="tab-recrutement active" data-target="family_clan">Famille de Clan</button>
+                        </div>
+                        <p style="color: red; text-align: center;">Cliquez pour activer/désactiver les options<br><br></p>
+
                         <div class="clanImage">
                             <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
                             <div class="clanDate">
@@ -139,6 +145,42 @@ document.addEventListener("DOMContentLoaded", () => {
             return `${days} J`;
         }
     }    
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll('.tab-recrutement');
+    const cards = document.querySelectorAll('.clanCard');
+
+    // Fonction pour mettre à jour l'affichage des cartes en fonction des filtres
+    function updateCardDisplay() {
+        const activeTabs = Array.from(buttons)
+            .filter(button => button.classList.contains('active'))
+            .map(button => button.getAttribute('data-target'));
+
+        cards.forEach(card => {
+            const hasBadgeServeur = card.querySelector('.badgeServeurContainer') !== null;
+
+            if (activeTabs.includes('new_clan') && hasBadgeServeur) {
+                card.style.display = 'block'; // Affiche les cartes Nouveau Clan
+            } else if (activeTabs.includes('family_clan') && !hasBadgeServeur) {
+                card.style.display = 'block'; // Affiche les cartes Famille de Clan
+            } else {
+                card.style.display = 'none'; // Masque les autres cartes
+            }
+        });
+    }
+
+    // Initialisation : Afficher toutes les cartes par défaut
+    updateCardDisplay();
+
+    // Ajouter des écouteurs d'événements pour chaque bouton
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            button.classList.toggle('active'); // Active/désactive le bouton
+            updateCardDisplay(); // Met à jour l'affichage des cartes
+        });
+    });
 });
 
 
