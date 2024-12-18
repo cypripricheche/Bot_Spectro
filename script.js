@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
     const buttons = document.querySelectorAll('.tab-recrutement');
 
+    // Fonction pour formater le texte Markdown
     function formatMarkdown(text) {
         return text
             .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
@@ -44,12 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/~~(.*?)~~/g, "<del>$1</del>");
     }
 
+    // Extraire le lien Discord
     function extractDiscordLink(text) {
         const discordRegex = /https?:\/\/(www\.)?discord\.(gg|io|me|li|com)\/[^\s]+/g;
         const matches = text.match(discordRegex);
         return matches ? matches[0] : null;
     }
 
+    // Récupérer et afficher les clans
     async function fetchClans() {
         try {
             const response = await fetch('/api/clans');
@@ -88,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="clanContent">
                             <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
-                            <p class="clanDescription">${formatMarkdown(clan.description)}</p>
+                            <div class="clanDescription">${formatMarkdown(clan.description)}</div>
                         </div>
                         <div class="clanBadges">
                             ${discordLink ? `<a href="${discordLink}" class="badge">Rejoindre Discord</a>` : ''}
@@ -98,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     container.appendChild(card);
                 });
 
-                updateCardDisplay(); // Mettre à jour l'affichage après création des cartes
+                updateCardDisplay(); // Mettre à jour l'affichage des cartes après le chargement
             } else {
                 container.innerHTML = '<p style="color: red;">Aucun clan trouvé.</p>';
             }
@@ -108,32 +111,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Filtrer l'affichage des cartes
     function updateCardDisplay() {
         const isNewClanActive = document.querySelector('[data-target="new_clan"]').classList.contains('active');
         const isFamilyClanActive = document.querySelector('[data-target="family_clan"]').classList.contains('active');
 
-        const cards = document.querySelectorAll('.clanCard'); // Mise à jour dynamique
-
-        cards.forEach(card => {
+        container.querySelectorAll('.clanCard').forEach(card => {
             const cardType = card.getAttribute('data-type');
             const hasBadgeServeur = cardType === 'new_clan';
 
+            // Nouveau Clan désactivé => retirer les cartes avec badge
             if (!isNewClanActive && hasBadgeServeur) {
-                // Nouveau Clan désactivé => masquer les cartes avec badge
                 card.style.display = 'none';
-            } else if (!isNewClanActive && !isFamilyClanActive && cardType === 'family_clan') {
-                // Aucun bouton actif => afficher les cartes sans badge (family_clan)
-                card.style.display = 'block';
-            } else if (isNewClanActive && cardType === 'new_clan') {
-                card.style.display = 'block';
-            } else if (isFamilyClanActive && cardType === 'family_clan') {
-                card.style.display = 'block';
+            }
+            // Si aucun bouton actif => afficher uniquement les cartes "family_clan"
+            else if (!isNewClanActive && !isFamilyClanActive && cardType === 'family_clan') {
+                card.style.display = 'flex';
+            }
+            // Par défaut, afficher les cartes actives
+            else if ((isNewClanActive && cardType === 'new_clan') || (isFamilyClanActive && cardType === 'family_clan')) {
+                card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
             }
         });
     }
 
+    // Formater le temps écoulé
     function formatTimeAgo(date) {
         const now = new Date();
         const diffInMinutes = Math.floor((now - date) / (1000 * 60)) + 60;
@@ -144,16 +148,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return `${Math.floor(diffInMinutes / 1440)} J`;
     }
 
-    // Boutons de filtrage
+    // Ajouter des écouteurs d'événements pour les boutons
     buttons.forEach(button => {
         button.addEventListener('click', () => {
-            button.classList.toggle('active'); // Activer/désactiver
-            updateCardDisplay();
+            button.classList.toggle('active'); // Active/désactive le bouton
+            updateCardDisplay(); // Met à jour l'affichage des cartes
         });
     });
 
-    fetchClans(); // Récupérer et afficher les clans
+    // Appel initial pour récupérer et afficher les clans
+    fetchClans();
 });
+
 
 
 
