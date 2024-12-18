@@ -896,12 +896,12 @@ header {
     padding-top: 25px;
 }
 
-/* Conteneur pour les badges Serveur */
+/* Conteneur pour les badges */
 .badgeServeurContainer {
     position: absolute;
     top: 110px; /* Ajustement de la position */
     right: 5px; /* Aligné à droite */
-    display: flex; /* Affiche les badges en ligne */
+    display: inline-flex; /* Affiche les badges en ligne */
     gap: 5px; /* Espacement entre les badges */
     align-items: center; /* Centre verticalement */
     background-color: rgba(73, 73, 73, 0.7); /* Fond gris semi-transparent */
@@ -910,20 +910,22 @@ header {
     padding: 3px 5px; /* Padding interne */
     min-height: 26px; /* Hauteur minimale */
     z-index: 4;
+    cursor: pointer;
 }
 
-/* Badge Serveur à l'intérieur du conteneur */
+/* Badge Serveur et Nouveau */
 .badgeServeur,
 .badgeNouveau {
     width: 20px;
     height: 20px;
-    object-fit: contain; /* Ajuste l'image sans déformation */
+    object-fit: contain;
     display: block;
+    position: relative; /* Permet d'ajouter les tooltips individuellement */
 }
 
-/* Tooltips pour chaque badge */
-.badgeServeurContainer[data-tooltip]::after {
-    content: attr(data-tooltip); /* Affiche le texte dynamique depuis l'attribut */
+/* Tooltips pour le badge Nouveau Clan */
+.badgeNouveau::after {
+    content: "Nouveau Clan";
     position: absolute;
     bottom: 120%;
     left: 50%;
@@ -941,12 +943,35 @@ header {
     z-index: 5;
 }
 
-/* Affichage des tooltips uniquement si le badge est présent */
-.badgeServeurContainer:hover::after,
-.badgeServeurContainer:active::after {
+/* Tooltips pour le badge Serveur */
+.badgeServeur::after {
+    content: "Serveur";
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Affichage des tooltips au survol */
+.badgeNouveau:hover::after,
+.badgeNouveau:active::after,
+.badgeServeur:hover::after,
+.badgeServeur:active::after {
     visibility: visible;
     opacity: 1;
 }
+
 
 .tab-recrutement {
     background-color: #262626;
