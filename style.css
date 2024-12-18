@@ -896,58 +896,70 @@ header {
     padding-top: 25px;
 }
 
-/* Conteneur pour les badges Serveur */
+/* Conteneur principal pour les badges */
 .badgeServeurContainer {
     position: absolute;
-    top: 110px; /* Ajustement de la position */
-    right: 5px; /* Aligné à droite */
-    display: flex; /* Affiche les badges en ligne */
-    gap: 5px; /* Espacement entre les badges */
-    align-items: center; /* Centre verticalement */
-    background-color: rgba(73, 73, 73, 0.7); /* Fond gris semi-transparent */
-    border: 1px solid #5c5c5c; /* Contour gris clair */
-    border-radius: 5px; /* Coins légèrement arrondis */
-    padding: 3px 5px; /* Padding interne */
-    min-height: 26px; /* Hauteur minimale */
-    z-index: 4;
+    top: 110px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: rgba(73, 73, 73, 0.7);
+    border: 1px solid #5c5c5c;
+    border-radius: 5px;
+    padding: 3px 5px;
+    z-index: 15;
 }
 
-/* Badge Serveur et Nouveau */
+/* Wrapper pour chaque badge */
+.badgeWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 16;
+}
+
+/* Badges individuels */
 .badgeServeur,
 .badgeNouveau {
     width: 20px;
     height: 20px;
     object-fit: contain;
     display: block;
-    position: relative; /* Permet d'ajouter un pseudo-élément */
+    z-index: 17;
 }
 
-/* Tooltip utilisant l'attribut alt */
-.badgeServeur::after,
-.badgeNouveau::after {
-    content: attr(alt); /* Utilise l'attribut "alt" comme contenu */
+/* Tooltip affiché au survol */
+.badgeTooltip {
     position: absolute;
-    bottom: 125%; /* Positionne le tooltip au-dessus */
+    bottom: calc(100% + 5px);
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.9); /* Fond sombre */
+    background-color: rgba(0, 0, 0, 0.9);
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 12px;
     white-space: nowrap;
-    visibility: hidden; /* Cache par défaut */
+    visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 5;
-    pointer-events: none; /* Empêche l'interaction avec le tooltip */
+    z-index: 9999;
+    pointer-events: none;
 }
 
-/* Affiche le tooltip uniquement au survol */
-.badgeServeur:hover::after,
-.badgeNouveau:hover::after {
+/* Afficher le tooltip au survol */
+.badgeWrapper:hover .badgeTooltip {
     visibility: visible;
     opacity: 1;
+}
+
+/* Correction pour la carte (clanCard) */
+.clanCard {
+    overflow: visible;
+    position: relative;
+    z-index: 1;
 }
 
 
