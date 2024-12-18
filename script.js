@@ -57,44 +57,55 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const response = await fetch('/api/clans');
             const result = await response.json();
-
+    
             container.innerHTML = '';
             if (result.status === "success" && result.data.length > 0) {
                 const sortedClans = result.data.sort((a, b) =>
                     new Date(b.publication_date) - new Date(a.publication_date)
                 );
-
+    
                 sortedClans.forEach(clan => {
                     const discordLink = extractDiscordLink(clan.description);
                     const publicationDate = new Date(clan.publication_date);
+    
                     const hasBadgeServeur = clan.serveur_id === "278653494846685186";
-                    const hasBadgeNouveau = clan.membre_clan <= 15; // Suppose une propriété dans la base de données
-                
+                    const hasBadgeNouveau = clan.membre_clan <= 15; // Nouveau Clan si membres <= 15
+                    const badgeFamilleDeClan = clan.clan_id && clan.description.includes('#') && 
+                        !clan.description.includes(clan.clan_id); // Vérifie si un autre ID est dans la description
+                    
+                    // Déterminer le type pour l'attribut data-type
+                    let cardType = 'default_clan';
+                    if (hasBadgeNouveau) cardType = 'new_clan';
+                    else if (badgeFamilleDeClan) cardType = 'family_clan';
+    
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
-                    card.setAttribute('data-type', hasBadgeNouveau ? 'new_clan' : 'family_clan');
-                
+                    card.setAttribute('data-type', cardType);
+    
                     // Génération dynamique des badges
                     const badgeHTML = `
-                        ${hasBadgeNouveau ? `
-                            <div class="badgeServeurContainer">
-                                <div class="badgeWrapper">
-                                    <img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">
-                                    <span class="badgeTooltip">Nouveau Clan</span>
-                                </div>
+                        ${badgeFamilleDeClan ? `
+                            <div class="badgeWrapper">
+                                <img class="badgeFamilleDeClan" src="Image/Badge/Famille De Clans.png" alt="Famille De Clan">
+                                <span class="badgeTooltip">Famille De Clan</span>
                             </div>
                         ` : ''}
-
+    
+                        ${hasBadgeNouveau ? `
+                            <div class="badgeWrapper">
+                                <img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">
+                                <span class="badgeTooltip">Nouveau Clan</span>
+                            </div>
+                        ` : ''}
+    
                         ${hasBadgeServeur ? `
-                            <div class="badgeServeurContainer">
-                                <div class="badgeWrapper">
-                                    <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
-                                    <span class="badgeTooltip">Serveur</span>
-                                </div>
+                            <div class="badgeWrapper">
+                                <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
+                                <span class="badgeTooltip">Serveur</span>
                             </div>
                         ` : ''}
                     `;
-
+    
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
@@ -103,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="clanAvatar">
                             <img src="${clan.clan_url_blason}" alt="Clan Blason">
                         </div>
-                        ${hasBadgeNouveau || hasBadgeServeur ? badgeHTML : ''}
+                        ${badgeHTML ? `<div class="badgeServeurContainer">${badgeHTML}</div>` : ''}
                         <div class="clanContent">
                             <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
@@ -115,8 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
                     `;
                     container.appendChild(card);
-                });                
-
+                });
+    
                 updateCardDisplay(); // Mettre à jour l'affichage des cartes après le chargement
             } else {
                 container.innerHTML = '<p style="color: red;">Aucun clan trouvé.</p>';
@@ -126,34 +137,35 @@ document.addEventListener("DOMContentLoaded", () => {
             container.innerHTML = '<p style="color: red;">Impossible de charger les clans.</p>';
         }
     }
+    
 
     // Filtrer l'affichage des cartes
     function updateCardDisplay() {
         const isNewClanActive = document.querySelector('[data-target="new_clan"]').classList.contains('active');
         const isFamilyClanActive = document.querySelector('[data-target="family_clan"]').classList.contains('active');
-    
+
         container.querySelectorAll('.clanCard').forEach(card => {
             const cardType = card.getAttribute('data-type');
-            const hasBadgeNouveau = cardType === 'new_clan';
-    
-            // Nouveau Clan désactivé => retirer les cartes avec badge (new_clan)
-            if (!isNewClanActive && hasBadgeNouveau) {
-                card.style.display = 'none';
-            }
-            // Si aucun bouton n'est actif => afficher seulement les cartes sans type new_clan ni family_clan
-            else if (!isNewClanActive && !isFamilyClanActive && cardType === 'none') {
-                card.style.display = 'flex';
-            }
-            // Si Nouveau Clan est actif => afficher les cartes avec badge
-            else if (isNewClanActive && hasBadgeNouveau) {
-                card.style.display = 'flex';
-            }
-            // Par défaut, on ne masque rien pour Famille de Clan (inutile ici)
-            else {
-                card.style.display = 'flex';
+            const isNewClan = cardType === 'new_clan';
+            const isFamilyClan = cardType === 'family_clan';
+
+            // Masquer les cartes si les boutons ne sont pas actifs
+            if (!isNewClanActive && isNewClan) {
+                card.style.display = 'none'; // Masquer les nouveaux clans si le bouton est désactivé
+            } else if (!isFamilyClanActive && isFamilyClan) {
+                card.style.display = 'none'; // Masquer les familles de clan si le bouton est désactivé
+            } else if (!isNewClanActive && !isFamilyClanActive && cardType === 'default_clan') {
+                card.style.display = 'flex'; // Afficher les clans par défaut si aucun bouton n'est actif
+            } else if (isNewClanActive && isNewClan) {
+                card.style.display = 'flex'; // Afficher les nouveaux clans si le bouton est activé
+            } else if (isFamilyClanActive && isFamilyClan) {
+                card.style.display = 'flex'; // Afficher les familles de clan si le bouton est activé
+            } else {
+                card.style.display = 'flex'; // Par défaut, afficher les cartes restantes
             }
         });
     }
+
 
     // Formater le temps écoulé
     function formatTimeAgo(date) {
@@ -177,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Appel initial pour récupérer et afficher les clans
     fetchClans();
 });
+
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
