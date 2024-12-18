@@ -732,7 +732,9 @@ header {
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
     position: relative;
+    z-index: 1;
 }
 
 .clanCard:hover {
@@ -955,13 +957,28 @@ header {
     opacity: 1;
 }
 
-/* Correction pour la carte (clanCard) */
-.clanCard {
-    overflow: visible;
-    position: relative;
-    z-index: 1;
+/* Cache le conteneur principal si aucun badge n'est présent */
+.badgeServeurContainer:empty {
+    display: none;
 }
 
+/* Cache le wrapper s'il n'y a pas d'image à l'intérieur */
+.badgeWrapper img:not([src]) {
+    display: none;
+}
+
+.badgeWrapper img[src=""] {
+    display: none;
+}
+
+/* Cache le badgeWrapper si l'image est vide ou non définie */
+.badgeWrapper:has(img:not([src])) {
+    display: none;
+}
+
+.badgeWrapper:has(img[src=""]) {
+    display: none;
+}
 
 
 .tab-recrutement {
