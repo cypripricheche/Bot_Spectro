@@ -783,16 +783,30 @@ header {
     flex: 1;
     overflow: hidden; /* Cache tout ce qui dépasse sauf la description */
     scrollbar-width: thin;
+    padding-top: 10px !important; /* Réduction de l'espacement en haut */
 }
 
+/* Nom du clan */
+.clanName {
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 0px 75px 0px 100px;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ID du clan */
 .clanTitle {
-    font-size: 20px;
+    font-size: 18px; /* Ajustement de la taille pour plus d'harmonie */
     color: #c778ff;
     border-bottom: 1px solid #444; /* Ajoute un trait pour séparer le titre */
-    padding: 10px;
+    padding: 0px 75px 5px 100px;
     flex-shrink: 0;
     margin: 0;
 }
+
 
 /* Description défilante */
 .clanDescription {
