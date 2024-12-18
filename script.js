@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="clanContent">
                             <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
-                            <div class="clanDescription">${formatMarkdown(clan.description)}</div>
+                            <p class="clanDescription">${formatMarkdown(clan.description)}</p>
                         </div>
                         <div class="clanBadges">
                             ${discordLink ? `<a href="${discordLink}" class="badge">Rejoindre Discord</a>` : ''}
@@ -113,23 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Filtrer l'affichage des cartes
     function updateCardDisplay() {
-        const isNewClanActive = document.querySelector('[data-target="new_clan"]').classList.contains('active');
-        const isFamilyClanActive = document.querySelector('[data-target="family_clan"]').classList.contains('active');
+        const activeTabs = Array.from(buttons)
+            .filter(button => button.classList.contains('active'))
+            .map(button => button.getAttribute('data-target'));
 
         container.querySelectorAll('.clanCard').forEach(card => {
             const cardType = card.getAttribute('data-type');
-            const hasBadgeServeur = cardType === 'new_clan';
-
-            // Nouveau Clan désactivé => retirer les cartes avec badge
-            if (!isNewClanActive && hasBadgeServeur) {
-                card.style.display = 'none';
-            }
-            // Si aucun bouton actif => afficher uniquement les cartes "family_clan"
-            else if (!isNewClanActive && !isFamilyClanActive && cardType === 'family_clan') {
-                card.style.display = 'block';
-            }
-            // Par défaut, afficher les cartes actives
-            else if ((isNewClanActive && cardType === 'new_clan') || (isFamilyClanActive && cardType === 'family_clan')) {
+            if (activeTabs.includes(cardType)) {
                 card.style.display = 'block';
             } else {
                 card.style.display = 'none';
@@ -159,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Appel initial pour récupérer et afficher les clans
     fetchClans();
 });
-
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
