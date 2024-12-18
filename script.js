@@ -115,24 +115,26 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateCardDisplay() {
         const isNewClanActive = document.querySelector('[data-target="new_clan"]').classList.contains('active');
         const isFamilyClanActive = document.querySelector('[data-target="family_clan"]').classList.contains('active');
-
+    
         container.querySelectorAll('.clanCard').forEach(card => {
             const cardType = card.getAttribute('data-type');
             const hasBadgeServeur = cardType === 'new_clan';
-
-            // Nouveau Clan désactivé => retirer les cartes avec badge
+    
+            // Nouveau Clan désactivé => retirer les cartes avec badge (new_clan)
             if (!isNewClanActive && hasBadgeServeur) {
                 card.style.display = 'none';
             }
-            // Si aucun bouton actif => afficher uniquement les cartes "family_clan"
-            else if (!isNewClanActive && !isFamilyClanActive && cardType === 'family_clan') {
+            // Si aucun bouton n'est actif => afficher seulement les cartes sans type new_clan ni family_clan
+            else if (!isNewClanActive && !isFamilyClanActive && cardType === 'none') {
                 card.style.display = 'flex';
             }
-            // Par défaut, afficher les cartes actives
-            else if ((isNewClanActive && cardType === 'new_clan') || (isFamilyClanActive && cardType === 'family_clan')) {
+            // Si Nouveau Clan est actif => afficher les cartes avec badge
+            else if (isNewClanActive && hasBadgeServeur) {
                 card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
+            }
+            // Par défaut, on ne masque rien pour Famille de Clan (inutile ici)
+            else {
+                card.style.display = 'flex';
             }
         });
     }
