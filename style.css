@@ -898,7 +898,7 @@ header {
     padding-top: 25px;
 }
 
-/* Conteneur principal pour les badges */
+/* Conteneur pour les badges Serveur */
 .badgeServeurContainer {
     position: absolute;
     top: 110px;
@@ -906,11 +906,21 @@ header {
     display: flex;
     gap: 5px;
     align-items: center;
-    background-color: rgba(73, 73, 73, 0.7);
+    background-color: rgba(73, 73, 73, 0.7); 
     border: 1px solid #5c5c5c;
     border-radius: 5px;
     padding: 3px 5px;
-    z-index: 15;
+    min-height: 26px;
+    z-index: 4;
+}
+
+/* Badge Serveur à l'intérieur du conteneur */
+.badgeServeur,
+.badgeNouveau {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: block;
 }
 
 /* Wrapper pour chaque badge */
@@ -920,16 +930,6 @@ header {
     align-items: center;
     justify-content: center;
     z-index: 16;
-}
-
-/* Badges individuels */
-.badgeServeur,
-.badgeNouveau {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    display: block;
-    z-index: 17;
 }
 
 /* Tooltip affiché au survol */
@@ -956,30 +956,6 @@ header {
     visibility: visible;
     opacity: 1;
 }
-
-/* Cache le conteneur principal si aucun badge n'est présent */
-.badgeServeurContainer:empty {
-    display: none;
-}
-
-/* Cache le wrapper s'il n'y a pas d'image à l'intérieur */
-.badgeWrapper img:not([src]) {
-    display: none;
-}
-
-.badgeWrapper img[src=""] {
-    display: none;
-}
-
-/* Cache le badgeWrapper si l'image est vide ou non définie */
-.badgeWrapper:has(img:not([src])) {
-    display: none;
-}
-
-.badgeWrapper:has(img[src=""]) {
-    display: none;
-}
-
 
 .tab-recrutement {
     background-color: #262626;
