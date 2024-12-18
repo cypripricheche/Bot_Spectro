@@ -898,31 +898,32 @@ header {
 
 /* Conteneur pour les badges Serveur */
 .badgeServeurContainer {
-    position: relative;
-    display: inline-flex;
-    gap: 5px;
-    align-items: center;
-    background-color: rgba(73, 73, 73, 0.7);
-    border: 1px solid #5c5c5c;
-    border-radius: 5px;
-    padding: 3px 5px;
-    min-height: 26px;
+    position: absolute;
+    top: 110px; /* Ajustement de la position */
+    right: 5px; /* Aligné à droite */
+    display: flex; /* Affiche les badges en ligne */
+    gap: 5px; /* Espacement entre les badges */
+    align-items: center; /* Centre verticalement */
+    background-color: rgba(73, 73, 73, 0.7); /* Fond gris semi-transparent */
+    border: 1px solid #5c5c5c; /* Contour gris clair */
+    border-radius: 5px; /* Coins légèrement arrondis */
+    padding: 3px 5px; /* Padding interne */
+    min-height: 26px; /* Hauteur minimale */
     z-index: 4;
-    cursor: pointer;
 }
 
-/* Badge Serveur et Nouveau */
+/* Badge Serveur à l'intérieur du conteneur */
 .badgeServeur,
 .badgeNouveau {
     width: 20px;
     height: 20px;
-    object-fit: contain;
+    object-fit: contain; /* Ajuste l'image sans déformation */
     display: block;
 }
 
 /* Tooltips pour chaque badge */
 .badgeServeurContainer[data-tooltip]::after {
-    content: attr(data-tooltip);
+    content: attr(data-tooltip); /* Affiche le texte dynamique depuis l'attribut */
     position: absolute;
     bottom: 120%;
     left: 50%;
@@ -946,12 +947,6 @@ header {
     visibility: visible;
     opacity: 1;
 }
-
-/* Suppression des tooltips si le badge n'est pas affiché */
-.badgeServeurContainer:empty::after {
-    display: none;
-}
-
 
 .tab-recrutement {
     background-color: #262626;
