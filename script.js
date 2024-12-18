@@ -81,6 +81,15 @@ document.addEventListener("DOMContentLoaded", () => {
                             <img src="${clan.clan_url_blason}" alt="Clan Blason">
                         </div>
 
+                        <!-- Badge Serveur conditionnel -->
+                        ${
+                            clan.serveur_id === "278653494846685186"
+                            ? `<div class="badgeServeurContainer">
+                                <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
+                               </div>`
+                            : ''
+                        }
+
                         <div class="clanContent">
                             <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
