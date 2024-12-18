@@ -113,16 +113,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Filtrer l'affichage des cartes
     function updateCardDisplay() {
-        const activeTabs = Array.from(buttons)
-            .filter(button => button.classList.contains('active'))
-            .map(button => button.getAttribute('data-target'));
+        const isNewClanActive = document.querySelector('[data-target="new_clan"]').classList.contains('active');
+        const isFamilyClanActive = document.querySelector('[data-target="family_clan"]').classList.contains('active');
 
         container.querySelectorAll('.clanCard').forEach(card => {
             const cardType = card.getAttribute('data-type');
-            if (activeTabs.includes(cardType)) {
-                card.style.display = 'block';
+            const hasBadgeServeur = cardType === 'new_clan';
+
+            if (isNewClanActive && hasBadgeServeur) {
+                card.style.display = 'block'; // Affiche Nouveau Clan si actif
+            } else if (isFamilyClanActive && !hasBadgeServeur) {
+                card.style.display = 'block'; // Affiche Famille de Clan si actif
+            } else if (!isNewClanActive && !isFamilyClanActive && !hasBadgeServeur) {
+                card.style.display = 'block'; // Affiche les cartes sans badge si les deux sont désactivés
             } else {
-                card.style.display = 'none';
+                card.style.display = 'none'; // Cache toutes les autres cartes
             }
         });
     }
@@ -149,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Appel initial pour récupérer et afficher les clans
     fetchClans();
 });
+
 
 
 
