@@ -76,10 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                     // Génération dynamique des badges
                     const badgeHTML = `
-                        <div class="badgeServeurContainer">
-                            ${hasBadgeNouveau ? `<img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">` : ''}
-                            ${hasBadgeServeur ? `<img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">` : ''}
-                        </div>
+                    <div class="badgeServeurContainer" data-tooltip="Nouveau Clan">
+                        ${hasBadgeNouveau ? `<img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">` : ''}
+                    </div>
+                    <div class="badgeServeurContainer" data-tooltip="Serveur">
+                        ${hasBadgeServeur ? `<img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">` : ''}
+                    </div>
                     `;
                 
                     card.innerHTML = `
