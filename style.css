@@ -896,6 +896,29 @@ header {
     padding-top: 25px;
 }
 
+/* Conteneur pour le badge Serveur */
+.badgeServeurContainer {
+    position: absolute;
+    top: 110px; /* Ajustement de la position */
+    right: 5px; /* Aligné à droite */
+    width: 40px;
+    height: 26px;
+    background-color: rgba(104, 103, 103, 0.7); /* Fond gris semi-transparent */
+    border: 1px solid #666; /* Contour gris clair */
+    border-radius: 5px; /* Coins légèrement arrondis */
+    display: flex;
+    justify-content: center; /* Centre le badge horizontalement */
+    align-items: center; /* Centre le badge verticalement */
+    z-index: 4;
+}
+
+/* Badge Serveur à l'intérieur du conteneur */
+.badgeServeur {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
 
 /* ============================================================================================================================ *
  *                                                                                                                              *
