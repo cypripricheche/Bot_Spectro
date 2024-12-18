@@ -919,6 +919,28 @@ header {
     object-fit: contain;
 }
 
+.tab-recrutement {
+    background-color: #262626;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-recrutement.active {
+    background-color: transparent;
+    border-color: #c778ff;
+    color: #c778ff;
+    font-weight: bold;
+}
+
+.tab-recrutement:hover {
+    background-color: #c778ff;
+    color: white;
+}
 
 /* ============================================================================================================================ *
  *                                                                                                                              *
