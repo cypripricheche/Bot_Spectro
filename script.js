@@ -76,20 +76,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                     // Génération dynamique des badges
                     const badgeHTML = `
-                    <div class="badgeServeurContainer" data-tooltip="Nouveau Clan">
-                     <div class="badgeWrapper">
-                        ${hasBadgeNouveau ? `<img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">` : ''}
-                         <span class="badgeTooltip">Nouveau Clan</span>
-                     </div>
-                    </div>
-                    <div class="badgeServeurContainer" data-tooltip="Serveur">
-                     <div class="badgeWrapper">
-                        ${hasBadgeServeur ? `<img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">` : ''}
-                         <span class="badgeTooltip">Serveur</span>
-                     </div>
-                    </div>
+                        ${hasBadgeNouveau ? `
+                            <div class="badgeServeurContainer">
+                                <div class="badgeWrapper">
+                                    <img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">
+                                    <span class="badgeTooltip">Nouveau Clan</span>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${hasBadgeServeur ? `
+                            <div class="badgeServeurContainer">
+                                <div class="badgeWrapper">
+                                    <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
+                                    <span class="badgeTooltip">Serveur</span>
+                                </div>
+                            </div>
+                        ` : ''}
                     `;
-                
+
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
@@ -172,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Appel initial pour récupérer et afficher les clans
     fetchClans();
 });
-
 
 
 // Ctrl + / ---> METTRE EN COMMENTAIRE / NE PLUS METTRE EN COMMENTAIRE
