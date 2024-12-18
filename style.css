@@ -735,7 +735,6 @@ header {
     overflow: visible;
     position: relative;
     z-index: 1;
-    pointer-events: none; /* Désactive tous les clics */
 }
 
 .clanCard:hover {
@@ -913,7 +912,6 @@ header {
     padding: 3px 5px;
     min-height: 26px;
     z-index: 4;
-    pointer-events: auto;
 }
 
 /* Badge Serveur à l'intérieur du conteneur */
