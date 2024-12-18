@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         </div>
 
                         <div class="clanContent">
-                            <h2 class="clanTitle">${clan.clan_name}</h2>
+                            <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
                         </div>
                         <div class="clanBadges">
