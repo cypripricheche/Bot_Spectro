@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const card = document.createElement('div');
                     card.classList.add('clanCard');
-                    card.setAttribute('data-type', hasBadgeServeur ? 'new_clan' : 'family_clan');
+                    card.setAttribute('data-type', hasBadgeServeur ? 'new_clan' : 'none');
 
                     card.innerHTML = `
                         <div class="clanImage">
@@ -120,14 +120,17 @@ document.addEventListener("DOMContentLoaded", () => {
             const cardType = card.getAttribute('data-type');
             const hasBadgeServeur = cardType === 'new_clan';
 
-            if (isNewClanActive && hasBadgeServeur) {
-                card.style.display = 'block'; // Affiche Nouveau Clan si actif
-            } else if (isFamilyClanActive && !hasBadgeServeur) {
-                card.style.display = 'block'; // Affiche Famille de Clan si actif
-            } else if (!isNewClanActive && !isFamilyClanActive && !hasBadgeServeur) {
-                card.style.display = 'block'; // Affiche les cartes sans badge si les deux sont désactivés
-            } else {
-                card.style.display = 'none'; // Cache toutes les autres cartes
+            // Nouveau Clan désactivé => retirer les cartes avec badge
+            if (!isNewClanActive && hasBadgeServeur) {
+                card.style.display = 'none';
+            }
+            // Si aucun bouton actif => afficher les cartes "none" (sans badge)
+            else if (!isNewClanActive && !isFamilyClanActive && cardType === 'none') {
+                card.style.display = 'block';
+            }
+            // Par défaut, afficher les cartes actives
+            else {
+                card.style.display = 'block';
             }
         });
     }
@@ -154,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Appel initial pour récupérer et afficher les clans
     fetchClans();
 });
-
 
 
 
