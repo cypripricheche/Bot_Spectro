@@ -32,7 +32,6 @@ document.querySelectorAll('.tab-button').forEach(button => {
 // OPTION - RECRUTEMENT
 // ============================================================================================================================
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".clanGridContainer");
     const buttons = document.querySelectorAll('.tab-recrutement');
@@ -70,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const publicationDate = new Date(clan.publication_date);
     
                     const hasBadgeServeur = clan.serveur_id === "278653494846685186";
+                    const hasBadgeElchiki = clan.serveur_id === "658055075553476618";
                     const hasBadgeNouveau = clan.membre_clan <= 15; // Nouveau Clan si membres <= 15
                     const badgeFamilleDeClan = clan.clan_id && clan.description.includes('#') && 
                         !clan.description.includes(clan.clan_id); // Vérifie si un autre ID est dans la description
@@ -91,22 +91,29 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="badgeTooltip">Famille De Clan</span>
                             </div>
                         ` : ''}
-    
+                    
                         ${hasBadgeNouveau ? `
                             <div class="badgeWrapper">
                                 <img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">
                                 <span class="badgeTooltip">Nouveau Clan</span>
                             </div>
                         ` : ''}
-    
+                    
                         ${hasBadgeServeur ? `
                             <div class="badgeWrapper">
                                 <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
                                 <span class="badgeTooltip">Serveur</span>
                             </div>
                         ` : ''}
+                    
+                        ${hasBadgeElchiki ? `
+                            <div class="badgeWrapper">
+                                <img class="badgeServeur" src="Image/Badge/Elchiki.png" alt="Elchiki Serveur">
+                                <span class="badgeTooltip">Elchiki</span>
+                            </div>
+                        ` : ''}
                     `;
-    
+                
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
@@ -119,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="badgeServeurContainer">
                                 ${badgeHTML}
                             </div>
-                        ` : ''}     
+                        ` : ''}                        
                         <div class="clanContent">
                             <h2 class="clanName">${clan.clan_name}</h2>
                             <h2 class="clanTitle">${clan.clan_id}</h2>
