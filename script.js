@@ -70,11 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
                     const hasBadgeServeur = clan.serveur_id === "278653494846685186";
                     const hasBadgeElchiki = clan.serveur_id === "658055075553476618";
-                    const hasBadgeNouveau = clan.membre_clan <= 15; // Nouveau Clan si membres <= 15
+                    const hasBadgeNouveau = clan.membre_clan <= 15; 
                     const badgeFamilleDeClan = clan.clan_id && clan.description.includes('#') && 
-                        !clan.description.includes(clan.clan_id); // Vérifie si un autre ID est dans la description
+                        !clan.description.includes(clan.clan_id);
                     
-                    // Déterminer le type pour l'attribut data-type
                     let cardType = 'default_clan';
                     if (hasBadgeNouveau) cardType = 'new_clan';
                     else if (badgeFamilleDeClan) cardType = 'family_clan';
@@ -83,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     card.classList.add('clanCard');
                     card.setAttribute('data-type', cardType);
     
-                    // Génération dynamique des badges
                     const badgeHTML = `
                         ${badgeFamilleDeClan ? `
                             <div class="badgeWrapper">
@@ -91,21 +89,21 @@ document.addEventListener("DOMContentLoaded", () => {
                                 <span class="badgeTooltip">Famille De Clan</span>
                             </div>
                         ` : ''}
-                    
+    
                         ${hasBadgeNouveau ? `
                             <div class="badgeWrapper">
                                 <img class="badgeNouveau" src="Image/Badge/Blason Coc.png" alt="Badge Nouveau">
                                 <span class="badgeTooltip">Nouveau Clan</span>
                             </div>
                         ` : ''}
-                    
+    
                         ${hasBadgeServeur ? `
                             <div class="badgeWrapper">
                                 <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
                                 <span class="badgeTooltip">Serveur</span>
                             </div>
                         ` : ''}
-                    
+    
                         ${hasBadgeElchiki ? `
                             <div class="badgeWrapper">
                                 <img class="badgeServeur" src="Image/Badge/Elchiki.png" alt="Elchiki Serveur">
@@ -113,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                         ` : ''}
                     `;
-                
+    
                     card.innerHTML = `
                         <div class="clanImage">
                             <img src="Image/Autre/ClashOfClans.png" alt="Clan Image">
@@ -122,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="clanAvatar">
                             <img src="${clan.clan_url_blason}" alt="Clan Blason">
                         </div>
-                        ${hasBadgeNouveau || hasBadgeServeur || badgeFamilleDeClan ? `
+                        ${hasBadgeNouveau || hasBadgeServeur || badgeFamilleDeClan || hasBadgeElchiki ? `
                             <div class="badgeServeurContainer">
                                 ${badgeHTML}
                             </div>
@@ -140,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     container.appendChild(card);
                 });
     
-                updateCardDisplay(); // Mettre à jour l'affichage des cartes après le chargement
+                updateCardDisplay();
             } else {
                 container.innerHTML = '<p style="color: red;">Aucun clan trouvé.</p>';
             }
@@ -148,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erreur :", error);
             container.innerHTML = '<p style="color: red;">Impossible de charger les clans.</p>';
         }
-    }
+    }    
     
 
     // Filtrer l'affichage des cartes
