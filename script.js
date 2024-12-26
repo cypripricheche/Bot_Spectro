@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         ${hasBadgeServeur ? `
                             <div class="badgeWrapper">
                                 <img class="badgeServeur" src="Image/Badge/Clash Of Clans Fr.png" alt="Badge Serveur">
-                                <span class="badgeTooltip">Serveur Clash Of Clans Fr</span>
+                                <span class="badgeTooltip">Serveur COC FR</span>
                             </div>
                         ` : ''}
     
