@@ -1,7 +1,7 @@
 from flask import Flask, send_file, send_from_directory, render_template_string, jsonify
 import mysql.connector
 from mysql.connector import Error
-from flask import abort, Flask, send_from_directory
+from flask import abort, Flask, send_from_directoryn send_file
 import os
 
 app = Flask(__name__, static_folder=".", template_folder=".")
@@ -9,7 +9,8 @@ app = Flask(__name__, static_folder=".", template_folder=".")
 # Route pour ads.txt
 @app.route('/ads.txt')
 def ads_txt():
-    return send_file(os.path.join(os.path.dirname(__file__), 'ads.txt'))
+    ads_path = os.path.join(os.path.dirname(__file__), 'ads.txt')
+    return send_file(ads_path, mimetype='text/plain')
 
 
 # Configuration de la base de données
