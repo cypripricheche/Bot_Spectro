@@ -2,13 +2,14 @@ from flask import Flask, send_file, send_from_directory, render_template_string,
 import mysql.connector
 from mysql.connector import Error
 from flask import abort, Flask, send_from_directory
+import os
 
 app = Flask(__name__, static_folder=".", template_folder=".")
 
 # Route pour ads.txt
 @app.route('/ads.txt')
 def ads_txt():
-    return send_from_directory('.', 'ads.txt')
+    return send_file(os.path.join(os.path.dirname(__file__), 'ads.txt'))
 
 
 # Configuration de la base de données
