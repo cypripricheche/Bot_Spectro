@@ -1,8 +1,8 @@
-from flask import Flask, send_file, send_from_directory, render_template_string, jsonify
+from flask import Flask, send_file, send_from_directory, render_template_string, jsonify, abort
 import mysql.connector
 from mysql.connector import Error
-from flask import abort, Flask, send_from_directoryn send_file
 import os
+
 
 app = Flask(__name__, static_folder=".", template_folder=".")
 
